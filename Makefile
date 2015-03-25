@@ -6,7 +6,7 @@
 #    By: lubaujar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/03/03 12:31:07 by lubaujar          #+#    #+#              #
-#    Updated: 2015/03/11 14:58:06 by lubaujar         ###   ########.fr        #
+#    Updated: 2015/03/25 01:26:42 by lubaujar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,8 @@ LDFLAGS = -I./include/ -I./libft/include/
 SRC = main.c\
 	  check.c\
 	  init.c\
-	  recurse.c
+	  recurse.c\
+	  lst.c
 
 OBJ = $(SRC:.c=.o)
 	SRCDIR	= ./src/

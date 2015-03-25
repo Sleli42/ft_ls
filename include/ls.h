@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ls.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lubaujar <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/03 12:09:37 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/03/11 14:58:37 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/03/25 03:05:43 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,10 @@ typedef struct	s_all
 	t_opt			opt;
 }				t_all;
 
+/* lst.c */
+void	lst_add_elem(t_infos *elem);
+t_infos	*lst_create_elem(t_infos *elem);
+
 /* main.c */
 int		main(int ac, char **av);
 void	read_directory(t_all *all);
@@ -62,6 +66,7 @@ int		check_options(t_all *all, char **argv);
 
 /* init.c */
 void	init_options(t_all *all);
+void	init_infos(t_all *all);
 char	*create_path_directory(char *arg);
 
 /* recurse.c */

@@ -1,37 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   lst.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/03/03 12:19:54 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/03/25 03:05:45 by lubaujar         ###   ########.fr       */
+/*   Created: 2015/03/25 01:00:29 by lubaujar          #+#    #+#             */
+/*   Updated: 2015/03/25 03:05:42 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-void	init_options(t_all *all)
+void	lst_add_elem(t_infos *elem, char *filename)
 {
-	all->opt.a = 0;
-	all->opt.l = 0;
-	all->opt.t = 0;
-	all->opt.r = 0;
-	all->opt.R = 0;
-	all->opt.no_opt = 0;
+	t_infos	*tmp;
+
+	tmp = lst_create_elem(elem, filename);
 }
 
-void	init_infos(t_all *all)
+t_infos		*lst_create_elem(t_infos *elem, char *filename)
 {
-	all->infos.path = NULL;
-	all->infos.name = NULL;
-	all->infos.user = NULL;
-	all->infos.grp = NULL;
-	all->infos.rights = NULL;
-	all->infos.date = NULL;
-	all->infos.link = NULL;
-	all->infos.size = NULL;
-	all->infos.next = NULL;
-	all->infos.prev = NULL;
+	if (!(elem = (t_infos *)malloc(sizeof(t_infos))))
+		ft_printf("error malloc\n");
+	/* init all infos */
+	return (elem);
 }
