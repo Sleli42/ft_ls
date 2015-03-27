@@ -6,7 +6,7 @@
 #    By: lubaujar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/03/03 12:31:07 by lubaujar          #+#    #+#              #
-#    Updated: 2015/03/25 01:26:42 by lubaujar         ###   ########.fr        #
+#    Updated: 2015/03/27 03:19:46 by lubaujar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ SRC = main.c\
 	  check.c\
 	  init.c\
 	  recurse.c\
-	  lst.c
+	  lst.c\
+	  test.c
 
 OBJ = $(SRC:.c=.o)
 	SRCDIR	= ./src/

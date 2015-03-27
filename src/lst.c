@@ -12,17 +12,51 @@
 
 #include "ls.h"
 
-void	lst_add_elem(t_infos *elem, char *filename)
+void	display_lst(t_infos *lst)
 {
 	t_infos	*tmp;
 
-	tmp = lst_create_elem(elem, filename);
+	tmp = lst;
+	while (lst)
+	{
+		ft_printf("%s\n", lst->path);
+		ft_printf("%s\n", lst->name);
+		lst = lst->next;
+	}
 }
 
-t_infos		*lst_create_elem(t_infos *elem, char *filename)
+void	lst_add_elem_back(t_infos **alst, t_infos *new_elem)
 {
-	if (!(elem = (t_infos *)malloc(sizeof(t_infos))))
+	t_infos	*curr;
+
+	curr = *alst;
+	if (curr)
+	{
+		while (curr->next)
+			curr = curr->next;
+		curr->next = new_elem;
+	}
+	else
+		*alst = new_elem;
+}
+
+t_infos		*lst_create_elem(char *path, char *filename)
+{
+	t_infos	*new;
+
+
+	if (!(new = (t_infos *)malloc(sizeof(t_infos))))
 		ft_printf("error malloc\n");
-	/* init all infos */
-	return (elem);
+	if (path == NULL || filename == NULL)
+	{
+			new->path = NULL;
+			new->name = NULL;
+	}
+	else
+	{
+		new->path = path;
+		new->name = filename;
+	}
+	new->next = NULL;
+	return (new);
 }

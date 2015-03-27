@@ -37,14 +37,8 @@ typedef struct	s_infos
 {
 	char			*path;
 	char			*name;
-	char			*user;
-	char			*grp;
-	char			*rights;
-	char			*date;
-	char			*link;
-	char			*size;
+	t_stat			stat;
 	struct s_infos	*next;
-	struct s_infos	*prev;
 }				t_infos;
 
 typedef struct	s_all
@@ -54,8 +48,9 @@ typedef struct	s_all
 }				t_all;
 
 /* lst.c */
-void	lst_add_elem(t_infos *elem);
-t_infos	*lst_create_elem(t_infos *elem);
+void	lst_add_elem_back(t_infos **alst, t_infos *elem);
+t_infos	*lst_create_elem(char *path, char *filename);
+void	display_lst(t_infos *lst);
 
 /* main.c */
 int		main(int ac, char **av);
@@ -65,8 +60,7 @@ void	read_directory(t_all *all);
 int		check_options(t_all *all, char **argv);
 
 /* init.c */
-void	init_options(t_all *all);
-void	init_infos(t_all *all);
+void	init_all(t_all *all);
 char	*create_path_directory(char *arg);
 
 /* recurse.c */
@@ -75,5 +69,6 @@ char	get_types(mode_t mode);
 
 int		ft_printf(char const *rfmt, ...);
 void	display_name(t_all *all, t_dirent *dirp, DIR *dir);
+void	test_statfile(t_infos *lst);
 
 #endif
