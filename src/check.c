@@ -6,13 +6,13 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/03 12:28:14 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/03/25 03:05:48 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/03/29 23:17:46 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-int		check_options(t_all *all, char **av)
+int		check_options(t_opt *opt, char **av)
 {
 	char	*check;
 
@@ -20,18 +20,18 @@ int		check_options(t_all *all, char **av)
 	if (check[0] == '-')
 	{
 		if (check[1] == 'a')
-			all->opt.a = 1;
+			opt->a = 1;
 		if (check[1] == 'l')
-			all->opt.l = 1;
+			opt->l = 1;
 		if (check[1] == 't')
-			all->opt.t = 1;
+			opt->t = 1;
 		if (check[1] == 'r')
-			all->opt.r = 1;
+			opt->r = 1;
 		if (check[1] == 'R')
-			all->opt.R = 1;
+			opt->R = 1;
 		return (1);
 	}
 	else
-		all->opt.no_opt = 1;
+		opt->no_opt = 1;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/03 12:09:37 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/03/25 03:05:43 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/03/29 23:50:47 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <dirent.h>
 # include <sys/stat.h>
 # include <sys/types.h>
+# include <time.h>
 # include <unistd.h>
 # include "libft.h"
 # include <string.h>
@@ -41,12 +42,6 @@ typedef struct	s_infos
 	struct s_infos	*next;
 }				t_infos;
 
-typedef struct	s_all
-{
-	t_infos			infos;
-	t_opt			opt;
-}				t_all;
-
 /* lst.c */
 void	lst_add_elem_back(t_infos **alst, t_infos *elem);
 t_infos	*lst_create_elem(char *path, char *filename);
@@ -54,21 +49,23 @@ void	display_lst(t_infos *lst);
 
 /* main.c */
 int		main(int ac, char **av);
-void	read_directory(t_all *all);
+void	read_directory(t_opt *opt, t_infos *infos);
 
 /* check.c */
-int		check_options(t_all *all, char **argv);
+int		check_options(t_opt *opt, char **av);
 
 /* init.c */
-void	init_all(t_all *all);
+void	init_all(t_opt *opt, t_infos *infos);
 char	*create_path_directory(char *arg);
 
 /* recurse.c */
-void	recurse_directory(t_all *all, char *path, DIR *dir);
+void	recurse_directory(t_infos *infos, char *path, DIR *dir);
 char	get_types(mode_t mode);
 
+/* utils.c */
+char	*cut_date(char *long_date);
 int		ft_printf(char const *rfmt, ...);
-void	display_name(t_all *all, t_dirent *dirp, DIR *dir);
+void	display_name(t_infos *infos, t_dirent *dirp, DIR *dir);
 void	test_statfile(t_infos *lst);
 
 #endif

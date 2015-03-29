@@ -6,13 +6,13 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/03 12:08:09 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/03/25 03:05:41 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/03/29 23:37:00 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-void	read_directory(t_all *all)
+void	read_directory(t_opt *opt, t_infos *infos)
 {
 	t_dirent	*dirp;
 	t_infos		*lst;
@@ -20,20 +20,20 @@ void	read_directory(t_all *all)
 
 	if (!(lst = (t_infos *)malloc(sizeof(t_infos))))
 		ft_printf("malloc error\n");
-	if (all->infos.path == NULL)
-		all->infos.path = "./";
-	if (!(dir = opendir(all->infos.path)))
+	if (infos->path == NULL)
+		infos->path = "./";
+	if (!(dir = opendir(infos->path)))
 		return ;
 	lst = NULL;
 	while ((dirp = readdir(dir)) != NULL)
 	{
 		//ft_printf("dirp->d_name: %s\n", dirp->d_name);
 		lst_add_elem_back(&lst, lst_create_elem(
-			ft_strjoin(all->infos.path, dirp->d_name), dirp->d_name));
+			ft_strjoin(infos->path, dirp->d_name), dirp->d_name));
 	}
 	test_statfile(lst);
 	//display_lst(lst);
-	if (all->opt.R == 1)
+	if (opt->R == 1)
 	{
 		//recurse_directory(all, all->infos.path, dir);
 		/*
@@ -46,16 +46,17 @@ void	read_directory(t_all *all)
 
 int		main(int ac, char **av)
 {
-	t_all	all;
+	t_opt	opt;
+	t_infos	infos;
 
-	init_all(&all);
+	init_all(&opt, &infos);
 	if (ac > 1)
 	{
-		if (check_options(&all, av) == 1)
-			all.infos.path = ft_strdup(av[2]);
+		if (check_options(&opt, av) == 1)
+			infos.path = ft_strdup(av[2]);
 		else
-			all.infos.path = ft_strdup(av[1]);
-		read_directory(&all);
+			infos.path = ft_strdup(av[1]);
+		read_directory(&opt, &infos);
 	}
 	return (0);
 }
