@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lubaujar <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/03/03 12:31:07 by lubaujar          #+#    #+#              #
-#    Updated: 2015/03/27 04:03:41 by lubaujar         ###   ########.fr        #
+#    Updated: 2015/03/30 17:26:40 by lubaujar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,8 @@ SRC = main.c\
 	  recurse.c\
 	  lst.c\
 	  utils.c\
-	  test.c
+	  test.c\
+	  sort.c\
 
 OBJ = $(SRC:.c=.o)
 	SRCDIR	= ./src/

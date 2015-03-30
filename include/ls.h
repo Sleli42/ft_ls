@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/03 12:09:37 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/03/30 03:27:10 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/03/30 17:27:12 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,14 @@ typedef struct	s_infos
 	struct s_infos	*next;
 }				t_infos;
 
+/* sort.c */
+t_infos	*sort_maj(t_infos *lst);
+
 /* lst.c */
 void	lst_add_elem_back(t_infos **alst, t_infos *elem);
 t_infos	*lst_create_elem(char *path, char *filename);
 void	display_lst(t_infos *lst);
 int 	len_lst(t_infos *lst);
-void	index_lst(t_infos **lst);
 
 /* main.c */
 int		main(int ac, char **av);
@@ -72,7 +74,7 @@ char	*get_rights(mode_t mode);
 char	*cut_date(char *long_date);
 int		ft_printf(char const *rfmt, ...);
 void	display_name(t_infos *infos, t_dirent *dirp, DIR *dir);
-void	test_statfile(t_infos *lst);
+void	test_statfile(t_infos **lst);
 
 int		find_max_link(t_infos *lst);
 
