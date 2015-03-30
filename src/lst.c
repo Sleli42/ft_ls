@@ -6,11 +6,38 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/25 01:00:29 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/03/29 23:17:50 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/03/30 03:27:07 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
+
+void	index_lst(t_infos **lst)
+{
+	int 	i;
+
+	i = 0;
+	while (i < len_lst(lst))
+	{
+		ft_printf("%s\n", lst[i]->name);
+	}
+	// ft_printf("name : %s\n", lst[3].name);
+}
+
+int		len_lst(t_infos *tmp)
+{
+	int		i;
+
+	i = 0;
+	if (tmp)
+	{
+		while (tmp->next)
+			tmp = tmp->next, i++;
+	}
+	else
+		return (0);
+	return (i);
+}
 
 void	display_lst(t_infos *lst)
 {

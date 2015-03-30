@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/03 12:08:09 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/03/29 23:37:00 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/03/30 03:27:08 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	read_directory(t_opt *opt, t_infos *infos)
 		lst_add_elem_back(&lst, lst_create_elem(
 			ft_strjoin(infos->path, dirp->d_name), dirp->d_name));
 	}
+	index_lst(&lst);
 	test_statfile(lst);
 	//display_lst(lst);
 	if (opt->R == 1)
