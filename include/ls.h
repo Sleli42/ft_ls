@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/03 12:09:37 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/04/01 00:46:13 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/04/02 02:20:58 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ t_infos	*lst_create_elem(char *path, char *filename);
 void	display_lst(t_infos *lst);
 int 	len_lst(t_infos *lst);
 void	del_lst(t_infos **alst);
+t_infos	*create_lst(char *path);
 
 /* main.c */
 int		main(int ac, char **av);
@@ -67,17 +68,18 @@ void	init_all(t_opt *opt, t_infos *infos);
 char	*create_path_directory(char *arg);
 
 /* recurse.c */
-void	recurse_directory(t_infos *lst, char *path);
-void	recurse_zis_dir(char *dir_name, char *path, t_dirent *dirp);
 char	get_types(mode_t mode);
+void	recurse_dir(t_infos *lst);
 
 /* utils.c */
 char	*get_rights(mode_t mode);
 char	*cut_date(char *long_date);
 int		ft_printf(char const *rfmt, ...);
-void	display_name(t_infos *infos, t_dirent *dirp, DIR *dir);
 void	test_statfile(t_infos **lst);
+int 	is_parent_or_current(char *nam);
 
 int		find_max_link(t_infos *lst);
+
+void 	check_another_dir(char *path);
 
 #endif

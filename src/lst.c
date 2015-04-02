@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/25 01:00:29 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/04/01 00:46:19 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/04/01 22:35:01 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,6 @@ void	del_lst(t_infos **alst)
 	while (tmp)
 	{
 		next_list = tmp->next;
-		//ft_printf("tmp->name: %s\n", tmp->name);
-		ft_strdel(&tmp->name);
-		//ft_printf("tmp->name: %s\n", tmp->name);
-		ft_strdel(&tmp->path);
-		free(&tmp->stat);
 		free(tmp);
 		tmp = next_list;
 	}
@@ -55,8 +50,8 @@ void	display_lst(t_infos *lst)
 	tmp = lst;
 	while (tmp != NULL)
 	{
-		if (ft_strncmp(tmp->name, ".", 1) != 0)
-			ft_printf("%s\n", tmp->name);
+		if (!is_parent_or_current(tmp->name))
+			ft_printf("%s\n", (tmp->name));
 		tmp = tmp->next;
 	}
 	// t_infos	*tmp;
