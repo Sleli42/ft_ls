@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/03 12:08:09 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/04/02 02:20:57 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/04/03 02:17:21 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,36 +17,23 @@ void	read_directory(t_opt *opt, t_infos *infos)
 	t_dirent	*dirp;
 	t_infos		*lst;
 	DIR			*dir;
+	char		*tmp;
 
 	if (infos->path == NULL)
 		infos->path = "./";
-	if (!(dir = opendir(ft_strjoin(infos->path, "/"))))
+	if (infos->path[ft_strlen(infos->path) - 1] != '/')
+		infos->path = ft_strjoin(infos->path, "/");
+	if (!(dir = opendir(infos->path)))
 		return ;
 	lst = NULL;
 	while ((dirp = readdir(dir)) != NULL)
 	{
-		//ft_printf("dirp->d_name: %s\n", dirp->d_name);
-		lst_add_elem_back(&lst, lst_create_elem(
-			ft_strjoin(infos->path, dirp->d_name), dirp->d_name));
+		tmp = ft_strjoin(infos->path, dirp->d_name);
+		lst_add_elem_back(&lst, lst_create_elem(tmp, dirp->d_name));
 	}
-	//test_statfile(lst);
-	//lst = sort_maj(lst);
-	display_lst(lst);
-	write(1, "\n", 1);
+	lst = sort_maj(lst);
 	if (opt->R == 1)
-		recurse_dir(lst);
-	// if (opt->R == 1)
-	// {
-	// 	display_lst(lst);
-	// 	recurse_directory(lst, infos->path);
-	// 	//recurse_directory(, all->infos.path, dir);
-	// 	/*
-	// 	while ((entry = readdir(dir)))
-	// 		printf("name: %s\n", entry->d_name);
-	// 	closedir(dir);
-	// 	*/
-	// }
-	closedir(dir);
+		test_recurse(lst);
 }
 
 int		main(int ac, char **av)

@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/03 12:09:37 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/04/02 02:20:58 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/04/03 02:17:19 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,17 +69,13 @@ char	*create_path_directory(char *arg);
 
 /* recurse.c */
 char	get_types(mode_t mode);
-void	recurse_dir(t_infos *lst);
+void	test_recurse(t_infos *lst);
 
 /* utils.c */
 char	*get_rights(mode_t mode);
 char	*cut_date(char *long_date);
 int		ft_printf(char const *rfmt, ...);
-void	test_statfile(t_infos **lst);
 int 	is_parent_or_current(char *nam);
 
 int		find_max_link(t_infos *lst);
-
-void 	check_another_dir(char *path);
-
 #endif

@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/25 01:00:29 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/04/01 22:35:01 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/04/03 02:17:25 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,13 @@ void	display_lst(t_infos *lst)
 
 	tmp = lst;
 	while (tmp != NULL)
-	{
-		if (!is_parent_or_current(tmp->name))
-			ft_printf("%s\n", (tmp->name));
+	 {
+	// 	if (opt->a == 1)
+	// 	{
+			ft_printf("%s\n", tmp->name);
+		//}
+		// ft_putstr(tmp->name);
+		// write(1, "\n", 1);
 		tmp = tmp->next;
 	}
 	// t_infos	*tmp;
