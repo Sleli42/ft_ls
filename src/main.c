@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/03 12:08:09 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/04/03 02:17:21 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/04/06 01:42:26 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,11 @@ void	read_directory(t_opt *opt, t_infos *infos)
 		lst_add_elem_back(&lst, lst_create_elem(tmp, dirp->d_name));
 	}
 	lst = sort_maj(lst);
+	display_lst(lst, opt);
 	if (opt->R == 1)
-		test_recurse(lst);
+		test_recurse(lst, opt);
+	if ((closedir(dir)) == -1)
+		ft_printf("error closedir\n");
 }
 
 int		main(int ac, char **av)

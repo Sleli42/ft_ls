@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/03 12:09:37 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/04/03 02:17:19 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/04/06 01:42:32 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ t_infos	*sort_maj(t_infos *lst);
 /* lst.c */
 void	lst_add_elem_back(t_infos **alst, t_infos *elem);
 t_infos	*lst_create_elem(char *path, char *filename);
-void	display_lst(t_infos *lst);
+void	display_lst(t_infos *lst, t_opt *opt);
 int 	len_lst(t_infos *lst);
 void	del_lst(t_infos **alst);
 t_infos	*create_lst(char *path);
@@ -69,7 +69,7 @@ char	*create_path_directory(char *arg);
 
 /* recurse.c */
 char	get_types(mode_t mode);
-void	test_recurse(t_infos *lst);
+void	test_recurse(t_infos *lst, t_opt *opt);
 
 /* utils.c */
 char	*get_rights(mode_t mode);

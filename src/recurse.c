@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/03 14:23:32 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/04/03 02:17:22 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/04/06 01:42:28 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	get_types(mode_t mode)
 	return (0);
 }
 
-void	test_recurse(t_infos *lst)
+void	test_recurse(t_infos *lst, t_opt *opt)
 {
 	t_infos	*tmp;
 	t_infos	*recurse;
@@ -41,12 +41,12 @@ void	test_recurse(t_infos *lst)
 		{
 			ft_printf("%s:\n", tmp->path);
 			recurse = sort_maj(recurse);
-			display_lst(recurse);
+			display_lst(recurse, opt);
 			write(1, "\n", 1);
-			test_recurse(recurse);
+			test_recurse(recurse, opt);
 		}
 	}
-	test_recurse(tmp->next);
+	test_recurse(tmp->next, opt);
 }
 
 t_infos	*create_lst(char *path)

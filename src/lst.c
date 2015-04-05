@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/25 01:00:29 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/04/03 02:17:25 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/04/06 01:42:29 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int		len_lst(t_infos *tmp)
 	i = 0;
 	if (tmp)
 	{
-		while (tmp->next)
+		while (tmp != NULL)
 			tmp = tmp->next, i++;
 	}
 	else
@@ -43,34 +43,24 @@ int		len_lst(t_infos *tmp)
 	return (i);
 }
 
-void	display_lst(t_infos *lst)
+void	display_lst(t_infos *lst, t_opt *opt)
 {
 	t_infos *tmp;
 
 	tmp = lst;
 	while (tmp != NULL)
-	 {
-	// 	if (opt->a == 1)
-	// 	{
+	{
+		if (opt->a == 1)
 			ft_printf("%s\n", tmp->name);
-		//}
-		// ft_putstr(tmp->name);
-		// write(1, "\n", 1);
+		else
+		{
+			if (tmp->name[0] != '.')
+				ft_printf("%s\n", tmp->name);
+		}
 		tmp = tmp->next;
 	}
-	// t_infos	*tmp;
-
-	// tmp = lst;
-	// // ft_printf("%s\n", lst->name);
-	// // ft_printf("%s\n", tmp->name);
-	// while (tmp)
-	// {
-	// 	//ft_printf("%s\n", lst->path);
-	// 	//if (tmp->name[0] != '.')
-	// 	 	ft_printf("%s\n", tmp->name);
-	// 	tmp = tmp->next;
-	// }
 }
+
 
 void	lst_add_elem_back(t_infos **alst, t_infos *new_elem)
 {

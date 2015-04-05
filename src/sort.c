@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/30 17:14:33 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/04/03 02:17:31 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/04/06 01:42:25 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,18 @@ t_infos	*sort_maj(t_infos *lst)
 {
 	t_infos *tmp;
 	t_infos	*ret;
+	int		i;
 
+	i = 0;
 	ret = lst;
 	tmp = ret;
 	while (tmp->next != NULL)
 	{
 		if (ft_strcmp(tmp->name, tmp->next->name) > 0)
 		{
-			//ft_printf("tmp name: %s\n", tmp->name);
 			swap_elem(tmp, tmp->next);
 			tmp = ret;
 		}
-		//ft_printf("tmp name: %s\n", tmp->name);
 		tmp = tmp->next;
 	}
 	return (ret);
