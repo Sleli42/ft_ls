@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/03 12:09:37 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/04/06 01:42:32 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/04/08 02:55:47 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,11 @@ typedef struct	s_infos
 	struct s_infos	*next;
 }				t_infos;
 
+void	test_opt(t_opt *opt);
+void	test_dir(t_infos *lst);
+void	test_path(t_infos *lst);
+t_infos	*lst_without_cache(t_infos *lst);
+
 /* sort.c */
 t_infos	*sort_maj(t_infos *lst);
 
@@ -61,7 +66,7 @@ int		main(int ac, char **av);
 void	read_directory(t_opt *opt, t_infos *infos);
 
 /* check.c */
-int		check_options(t_opt *opt, char **av);
+void	check_options(t_opt *opt, char **av);
 
 /* init.c */
 void	init_all(t_opt *opt, t_infos *infos);
@@ -69,7 +74,7 @@ char	*create_path_directory(char *arg);
 
 /* recurse.c */
 char	get_types(mode_t mode);
-void	test_recurse(t_infos *lst, t_opt *opt);
+void	test_recurse(t_infos *lst, t_opt *opt, char *path);
 
 /* utils.c */
 char	*get_rights(mode_t mode);
@@ -78,4 +83,9 @@ int		ft_printf(char const *rfmt, ...);
 int 	is_parent_or_current(char *nam);
 
 int		find_max_link(t_infos *lst);
+
+/* display.c */
+void	display_recurse(char *path, t_infos *recurse, t_opt *opt);
+void	display_lst(t_infos *lst, t_opt *opt);
 #endif
+;

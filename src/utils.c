@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/27 03:58:30 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/04/06 01:42:27 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/04/08 02:55:51 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int		is_parent_or_current(char *name)
 {
-	if (((ft_strcmp(name, ".") == 0)) || (ft_strcmp(name, "..") == 0))
+	if  ((ft_strcmp(name, ".") == 0 && ft_strlen(name) == 1)
+			|| (ft_strcmp(name, "..") == 0 && ft_strlen(name) == 2))
 		return (1);
 	return (0);
 }

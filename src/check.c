@@ -6,32 +6,36 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/03 12:28:14 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/04/03 02:17:30 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/04/08 02:55:45 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-int		check_options(t_opt *opt, char **av)
+void	check_options(t_opt *opt, char **av)
 {
 	char	*check;
+	int		i;
 
 	check = av[1];
-	if (check[0] == '-')
+	i = 0;
+	if (check[i] == '-')
 	{
-		if (check[1] == 'a')
-			opt->a = 1;
-		if (check[1] == 'l')
-			opt->l = 1;
-		if (check[1] == 't')
-			opt->t = 1;
-		if (check[1] == 'r')
-			opt->r = 1;
-		if (check[1] == 'R')
-			opt->R = 1;
-		return (1);
+		while (check[i])
+		{
+			if (check[i] == 'a')
+				opt->a = 1;
+			if (check[i] == 'l')
+				opt->l = 1;
+			if (check[i] == 't')
+				opt->t = 1;
+			if (check[i] == 'r')
+				opt->r = 1;
+			if (check[i] == 'R')
+				opt->R = 1;
+			i++;
+		}
 	}
 	else
 		opt->no_opt = 1;
-	return (0);
 }
