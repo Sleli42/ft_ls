@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/03 12:19:54 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/04/08 02:55:48 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/04/09 02:19:44 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,5 @@ void	init_all(t_opt *opt, t_infos *infos)
 	opt->no_opt = 0;
 	infos->name = NULL;
 	infos->path = NULL;
+	infos->is_dir = 0;
 }

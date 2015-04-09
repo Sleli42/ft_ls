@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/27 03:04:17 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/04/08 02:55:44 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/04/09 03:20:57 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,54 @@ void	test_statfile(t_infos **lst)
 		// ft_printf("name:%s  link:%d  size:%d  date:%s\n", tmp->name, tmp->stat.st_nlink,
 		 //tmp->stat.st_size, date);
 		tmp = tmp->next;
+	}
+}
+
+void	test_path(t_infos *lst)
+{
+	t_infos *tmp;
+
+	tmp = lst;
+	while (tmp)
+	{
+		ft_printf("path: %s\n", tmp->path);
+		tmp = tmp->next;
+	}
+}
+
+void	test_opt(t_opt *opt)
+{
+	ft_printf("opt->%c = %d\n", 'a', opt->a);
+	ft_printf("opt->%c = %d\n", 'l', opt->l);
+	ft_printf("opt->%c = %d\n", 'r', opt->r);
+	ft_printf("opt->%c = %d\n", 't', opt->t);
+	ft_printf("opt->%c = %d\n", 'R', opt->R);
+}
+
+void	test_dir(t_infos *lst)
+{
+	t_infos	*tmp;
+
+	tmp = lst;
+	while (tmp)
+	{
+		if (tmp->type == 'd')
+			ft_printf("%s\n", tmp->name);
+		// if (tmp->next == NULL)
+		// 	ft_printf("lastpath: %s\n", tmp->path);
+		 tmp = tmp->next;
+	}
+}
+
+void	test_dir2(t_infos *lst)
+{
+	t_infos	*tmp;
+
+	tmp = lst;
+	while (tmp)
+	{
+		if (tmp->is_dir == 1)
+			ft_printf("[T.D]%s\n", tmp->name);
+		 tmp = tmp->next;
 	}
 }

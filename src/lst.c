@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/25 01:00:29 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/04/08 02:55:51 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/04/09 03:20:17 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	lst_add_elem_back(t_infos **alst, t_infos *new_elem)
 		*alst = new_elem;
 }
 
-t_infos		*lst_create_elem(char *path, char *filename)
+t_infos		*lst_create_elem(char *path, char *filename, t_dirent *dirp)
 {
 	t_infos	*new;
 
@@ -72,9 +72,14 @@ t_infos		*lst_create_elem(char *path, char *filename)
 	}
 	else
 	{
+		new->is_dir = 0;
 		new->path = path;
 		new->name = filename;
+		if (dirp->d_type == DT_DIR)
+			new->is_dir = 1;
 	}
+	// ft_printf("[lst] |%s|\n", new->name);
+	// ft_printf("[lst] |%d|\n", new->is_dir);
 	new->next = NULL;
 	return (new);
 }
