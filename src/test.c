@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/27 03:04:17 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/04/09 03:20:57 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/04/12 22:05:06 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,3 +102,20 @@ void	test_dir2(t_infos *lst)
 		 tmp = tmp->next;
 	}
 }
+
+void 	test_sort(t_infos **alst)
+{
+	t_infos *tmp;
+
+	tmp = *alst;
+	if (tmp)
+	{
+		while (tmp->next)
+		{
+			ft_printf("n1: %s\nn2: %s\n", tmp->name, tmp->next->name);
+			ft_printf("cmp = %d\n", ft_strcmp(tmp->name, tmp->next->name));
+			tmp = tmp->next;
+		}
+	}
+}
+

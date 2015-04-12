@@ -6,26 +6,31 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/25 01:00:29 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/04/09 03:20:17 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/04/12 21:53:45 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-void	del_lst(t_infos **alst)
+void	del_lst(t_infos *alst)
 {
 	t_infos	*next_list;
 	t_infos	*tmp;
 
-	tmp = *alst;
+	tmp = alst;
+	next_list = NULL;
 	//ft_putstr("SALOPE\n");
 	while (tmp)
 	{
 		next_list = tmp->next;
-		free(tmp);
+		if (tmp->path)
+			free(tmp->path);
+		if (tmp->name)
+			free(tmp->name);
+		if (tmp)
+			free(tmp);
 		tmp = next_list;
 	}
-	*alst = NULL;
 }
 
 int		len_lst(t_infos *tmp)
@@ -72,9 +77,8 @@ t_infos		*lst_create_elem(char *path, char *filename, t_dirent *dirp)
 	}
 	else
 	{
-		new->is_dir = 0;
-		new->path = path;
-		new->name = filename;
+		new->path = ft_strdup(path);
+		new->name = ft_strdup(filename);
 		if (dirp->d_type == DT_DIR)
 			new->is_dir = 1;
 	}

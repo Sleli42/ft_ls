@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/07 20:01:43 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/04/08 02:55:43 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/04/12 21:34:29 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 void	display_recurse(char *path, t_infos *recurse, t_opt *opt)
 {
 	ft_printf("%s:\n", path);
-	recurse = sort_maj(recurse);
+	//recurse = sort_maj(recurse);
 	display_lst(recurse, opt);
 	write(1, "\n", 1);
 }

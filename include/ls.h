@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/03 12:09:37 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/04/09 03:17:57 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/04/12 23:51:11 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,22 +47,29 @@ typedef struct	s_infos
 	struct s_infos	*next;
 }				t_infos;
 
+typedef struct 	s_control
+{
+	t_infos 	*content;
+}				t_control;
+
 /* test.c */
 void	test_opt(t_opt *opt);
 void	test_dir(t_infos *lst);
 void	test_dir2(t_infos *lst);
 void	test_path(t_infos *lst);
 void	test_statfile(t_infos **lst);
+void	test_sort(t_infos **lst);
 
 /* sort.c */
 t_infos	*sort_maj(t_infos *lst);
+t_infos	*sort_name(t_infos **alst);
 
 /* lst.c */
 void	lst_add_elem_back(t_infos **alst, t_infos *elem);
 t_infos	*lst_create_elem(char *path, char *filename, t_dirent *dirp);
 void	display_lst(t_infos *lst, t_opt *opt);
 int 	len_lst(t_infos *lst);
-void	del_lst(t_infos **alst);
+void	del_lst(t_infos *alst);
 t_infos	*create_lst(char *path);
 
 /* main.c */
@@ -93,4 +100,3 @@ int		find_max_link(t_infos *lst);
 void	display_recurse(char *path, t_infos *recurse, t_opt *opt);
 void	display_lst(t_infos *lst, t_opt *opt);
 #endif
-;

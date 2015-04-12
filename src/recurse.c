@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/03 14:23:32 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/04/09 03:18:49 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/04/12 21:54:05 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,33 @@ void	test_recurse(t_infos *lst, t_opt *opt)
 		return ;
 	if (lstat(tmp->path, &tmp->stat) == -1)
 		return ;
-	if (tmp->is_dir == 1)
+	if (tmp->is_dir == 1 && get_type(tmp->stat.st_mode) == 'd')
 	{
-			ft_printf("---> %s\n", tmp->path);
+		if (is_parent_or_current(tmp->name) != 1)
+		{
+			ft_printf("\n\n%s\n\n", tmp->name);
 			recurse = create_lst(tmp->path);
-			recurse = sort_maj(recurse);
-			display_lst(recurse, opt);
-			return ;
-			// test_dir2(recurse);
-			// return ;
+			display_recurse(tmp->path, recurse, opt);
 			if (recurse)
 			{
+				//ft_printf("yolo\n");
 				test_recurse(recurse, opt);
-				del_lst(&recurse);
+				del_lst(recurse);
 			}
-			//del_lst(&recurse);
+			//ft_printf("---> %s\n", tmp->path);
+			// recurse = create_lst(tmp->path);
+			// //recurse = sort_maj(recurse);
+			// display_lst(recurse, opt);
+			// // test_dir2(recurse);
+			// // return ;
+			// if (recurse)
+			// {
+			// 	test_recurse(recurse, opt);
+			// 	del_lst(&recurse);
+			// }
 		}
+			//del_lst(&recurse);
+	}
 	test_recurse(tmp->next, opt);
 }
 
@@ -61,12 +72,9 @@ t_infos	*create_lst(char *path)
 	//ft_printf("path: %s\n", path);
 	while ((dirp = readdir(dir)) != NULL)
 	{
-		new->is_dir = 0;
-		if (dirp->d_type == DT_DIR)
-			new->is_dir = 1;
 		str = ft_strjoin(path, dirp->d_name);
 		lst_add_elem_back(&new, lst_create_elem(str, dirp->d_name, dirp));
-		//ft_strdel(&str);
+		ft_strdel(&str);
 	}
 	// ft_strdel(&path);
 	if ((closedir(dir)) == -1)
