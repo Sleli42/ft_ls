@@ -6,41 +6,38 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/03 12:08:09 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/04/13 01:46:43 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/04/14 05:09:13 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-void	read_directory(t_opt *opt, t_infos *infos)
+void	read_directory(t_opt *opt, t_all *all)
 {
 	t_dirent	*dirp;
-	t_infos		*lst;
+	t_all		*lst;
+	t_infos 	*new;
 	DIR			*dir;
 	char		*tmp;
 
-	if (infos->path == NULL)
-		infos->path = "./";
-	if (infos->path[ft_strlen(infos->path) - 1] != '/')
-		infos->path = ft_strjoin(infos->path, "/");
-	if (!(dir = opendir(infos->path)))
+	lst = (t_all *)malloc(sizeof(t_all));
+	if (all->content->path== NULL)
+		all->content->path= "./";
+	if (all->content->path[ft_strlen(all->content->path) - 1] != '/')
+		all->content->path= ft_strjoin(all->content->path, "/");
+	if (!(dir = opendir(all->content->path)))
 		return ;
-	lst = NULL;
 	while ((dirp = readdir(dir)) != NULL)
 	{
-		tmp = ft_strjoin(infos->path, dirp->d_name);
-		lst_add_elem_back(&lst, lst_create_elem(tmp, dirp->d_name, dirp));
+		new = add_statfile(tmp, dirp->d_name, dirp);
+		tmp = ft_strjoin(all->content->path, dirp->d_name);
+		lst_add_elem_back(&lst, lst_create_elem(new));
 	}
-	// test_dir2(lst);
-	// return ;
-	//lst = sort_maj(lst);				/* --> GROS probleme de tri */
-	// test_sort(&lst);
-	// return ;
-	display_lst(lst, opt);
-	// lst = sort_name(&lst);
-	// write(1, "\n", 1);
-	// display_lst(lst, opt);
-	// return ;
+	//test_lst(lst);
+	//ft_printf("name: %s\npath: %s\n", lst->content->name, lst->content->path);
+	display_lst2(lst, opt);
+	//display_lst(lst, opt);
+	exit (1);
 	if (opt->R == 1)
 		test_recurse(lst, opt);
 	if ((closedir(dir)) == -1)
@@ -50,17 +47,17 @@ void	read_directory(t_opt *opt, t_infos *infos)
 int		main(int ac, char **av)
 {
 	t_opt	opt;
-	t_infos	infos;
+	t_all 	all;
 
-	init_all(&opt, &infos);
+	init(&opt, &all);
 	check_options(&opt, av);
 	if (ac > 1)
 	{
 		if (opt.no_opt == 0)
-			infos.path = ft_strdup(av[2]);
+			all.content->path= ft_strdup(av[2]);
 		else
-			infos.path = ft_strdup(av[1]);
-		read_directory(&opt, &infos);
+			all.content->path= ft_strdup(av[1]);
+		read_directory(&opt, &all);
 	}
 	return (0);
 }

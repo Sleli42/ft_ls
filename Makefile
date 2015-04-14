@@ -6,7 +6,7 @@
 #    By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/03/03 12:31:07 by lubaujar          #+#    #+#              #
-#    Updated: 2015/04/08 02:55:46 by lubaujar         ###   ########.fr        #
+#    Updated: 2015/04/14 02:52:23 by lubaujar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ SRC = main.c\
 	  utils.c\
 	  test.c\
 	  sort.c\
-	  display.c
+	  display.c\
+	  add.c
 
 OBJ = $(SRC:.c=.o)
 	SRCDIR	= ./src/
