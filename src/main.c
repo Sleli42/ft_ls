@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/03 12:08:09 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/04/14 05:09:13 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/04/14 19:51:09 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ void	read_directory(t_opt *opt, t_all *all)
 {
 	t_dirent	*dirp;
 	t_all		*lst;
-	t_infos 	*new;
 	DIR			*dir;
 	char		*tmp;
 
 	lst = (t_all *)malloc(sizeof(t_all));
+	lst = NULL;
 	if (all->content->path== NULL)
 		all->content->path= "./";
 	if (all->content->path[ft_strlen(all->content->path) - 1] != '/')
@@ -29,14 +29,16 @@ void	read_directory(t_opt *opt, t_all *all)
 		return ;
 	while ((dirp = readdir(dir)) != NULL)
 	{
-		new = add_statfile(tmp, dirp->d_name, dirp);
 		tmp = ft_strjoin(all->content->path, dirp->d_name);
-		lst_add_elem_back(&lst, lst_create_elem(new));
+		lst_add_elem_back(&lst, lst_create_elem(
+			add_statfile(tmp, dirp->d_name, dirp)));
 	}
 	//test_lst(lst);
 	//ft_printf("name: %s\npath: %s\n", lst->content->name, lst->content->path);
 	display_lst2(lst, opt);
-	//display_lst(lst, opt);
+	write (1,"\n",1);
+	sort_name(&lst);
+	display_lst2(lst, opt);
 	exit (1);
 	if (opt->R == 1)
 		test_recurse(lst, opt);

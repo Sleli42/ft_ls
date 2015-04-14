@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/25 01:00:29 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/04/14 05:04:56 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/04/14 19:41:08 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,19 @@ void	del_lst(t_all *alst)
 	tmp = alst;
 	next_list = NULL;
 	//ft_putstr("SALOPE\n");
-	while (tmp)
+	if (tmp)
 	{
-		next_list = tmp->next;
-		if (tmp->content->path)
-			free(tmp->content->path);
-		if (tmp->content->name)
-			free(tmp->content->name);
-		if (tmp)
-			free(tmp);
-		tmp = next_list;
+		while (tmp)
+		{
+			next_list = tmp->next;
+			if (tmp->content->path)
+				free(tmp->content->path);
+			if (tmp->content->name)
+				free(tmp->content->name);
+			if (tmp)
+				free(tmp);
+			tmp = next_list;
+		}
 	}
 }
 
