@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/03 12:09:37 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/04/14 19:51:19 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/04/15 03:53:38 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,16 @@ typedef struct	s_infos
 {
 	char			*path;
 	char			*name;
+	char 			*date;
+	char 			*rights;
+	char 			*link;
+	char 			*size;
 	int 			is_dir;
+	unsigned int	blksize;
+	// int 			maxlen_link;
+	// int 			maxlen_size;
+	struct passwd	*uid;
+ 	struct group 	*gid;
 	t_stat			stat;
 }				t_infos;
 
@@ -97,10 +106,11 @@ int 	is_parent_or_current(char *name);
 int 	get_type2(unsigned char c);
 char 	get_type(mode_t mode);
 
-int		find_max_link(t_all *lst);
+void	define_maxlen(t_all **alst);
 
 /* display.c */
+void 	displays(t_all *all, t_opt *opt);
 void	display_recurse(char *path, t_all *recurse, t_opt *opt);
-void	display_lst(t_all **lst, t_opt *opt);
-void 	display_lst2(t_all *all, t_opt *opt);
+void 	display_lst(t_all *all, t_opt *opt);
+void 	display_statfile(t_all *all, t_opt *opt);
 #endif

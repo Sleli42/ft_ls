@@ -6,11 +6,123 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/27 03:58:30 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/04/09 03:05:02 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/04/15 03:53:36 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
+
+int 	search_max_size(t_all *lst)
+{
+	t_all 	*tmp;
+	int 	ret;
+
+	tmp = lst;
+	ret = 0;
+	if (lst)
+	{
+		while (tmp)
+		{
+			if ((int)ft_strlen(tmp->content->size) > ret)
+				ret = (int)ft_strlen(tmp->content->size);
+			tmp = tmp->next;
+		}
+	}
+	return (ret);
+}
+
+int 	search_max_link(t_all *lst)
+{
+	t_all 	*tmp;
+	int 	ret;
+
+	tmp = lst;
+	ret = 0;
+	if (lst)
+	{
+		while (tmp)
+		{
+			if ((int)ft_strlen(tmp->content->link) > ret)
+				ret = (int)ft_strlen(tmp->content->link);
+			tmp = tmp->next;
+		}
+	}
+	return (ret);
+}
+
+char 	*create_str(char *s, int max)
+{
+	char 	*ret;
+	int 	i;
+
+	ret = (char *)malloc(sizeof(char) * max + 1);
+	i = 0;
+	while (i < max - ((int)ft_strlen(s)))
+		ret[i++] = ' ';
+	while (*s)
+		ret[i++] = *s++;
+	ret[i] = '\0';
+	return (ret);
+}
+
+void 	modif_link(t_all **lst, int max)
+{
+	t_all 	*tmp;
+	char 	*s;
+
+	tmp = *lst;
+	if (*lst)
+	{
+		while (tmp)
+		{
+			if ((int)ft_strlen(tmp->content->link) < max)
+			{
+				//ft_printf("lnk: %s\n", tmp->content->link);
+				s = create_str(tmp->content->link, max);
+				tmp->content->link = ft_strdup(s);
+				// ft_printf("lnk: %s\n", tmp->content->link);
+				ft_strdel(&s);
+			}
+			tmp = tmp->next;
+		}
+	}
+}
+
+void 	modif_size(t_all **lst, int max)
+{
+	t_all 	*tmp;
+	char 	*s;
+
+	tmp = *lst;
+	if (*lst)
+	{
+		while (tmp)
+		{
+			if ((int)ft_strlen(tmp->content->size) < max)
+			{
+				// ft_printf("lnk: %s\n", tmp->content->size);
+				s = create_str(tmp->content->size, max);
+				tmp->content->size = ft_strdup(s);
+				// ft_printf("lnk: %s\n", tmp->content->size);
+				ft_strdel(&s);
+			}
+			tmp = tmp->next;
+		}
+	}
+}
+
+void 	define_maxlen(t_all **alst)
+{
+	t_all 	*tmp;
+	int 	maxlen_link;
+	int  	maxlen_size;
+
+	tmp = *alst;
+	maxlen_link = search_max_link(tmp);
+	maxlen_size = search_max_size(tmp);
+	modif_link(alst, maxlen_link);
+	modif_size(alst, maxlen_size);
+}
 
 char	get_type(mode_t mode)
 {
@@ -21,16 +133,6 @@ char	get_type(mode_t mode)
 	else if (S_ISCHR(mode))
 		return ('c');
 	return (0);
-}
-
-int 	get_type2(unsigned char c)
-{
-	int 	ret;
-
-	ret = 0;
-	if (c == DT_DIR)
-		ret = 1;
-	return (ret);
 }
 
 int		is_parent_or_current(char *name)
@@ -51,11 +153,11 @@ char	*cut_date(char *long_date)
 	j = 0;
 	while (i - 4 < 12)
 		s[j++] = long_date[i++];
-	s[i] = '\0';
+	s[j] = '\0';
 	return (s);
 }
 
-char	*get_rights(mode_t mode)
+char	*get_rights(mode_t mode)			/* void -> putchar all char32 */
 {
 	char	*s;
 	int		i;

@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/14 02:36:49 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/04/14 03:30:44 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/04/15 03:53:25 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,14 @@ t_infos 	*add_statfile(char *path, char *filename, t_dirent *dirp)
 	infos->name = ft_strdup(filename);
 	if (dirp->d_type == DT_DIR)
 		infos->is_dir = 1;
+	if (lstat(infos->path, &infos->stat) == -1)
+		ft_printf("[-l]error lstat\n");
+	infos->uid = getpwuid(infos->stat.st_uid);
+	infos->gid = getgrgid(infos->stat.st_gid);
+	infos->rights = ft_strdup(get_rights(infos->stat.st_mode));
+	infos->date = ft_strdup(cut_date(ctime(&(infos->stat.st_mtime))));
+	infos->link = ft_strdup(ft_itoa(infos->stat.st_nlink));
+	infos->size = ft_strdup(ft_itoa(infos->stat.st_size));
+	infos->blksize = infos->stat.st_blocks;
 	return (infos);
 }

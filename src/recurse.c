@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/03 14:23:32 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/04/14 19:44:48 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/04/15 03:53:33 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,14 @@ void	test_recurse(t_all *lst, t_opt *opt)
 	{
 		if (is_parent_or_current(tmp->content->name) != 1)
 		{
-			recurse = create_lst(tmp->content->path);
-			display_recurse(tmp->content->path, recurse, opt);
-			if (recurse)
+			if (opt->a != 1 && tmp->content->name[0] == '.')
+				tmp = tmp->next;
+			else
 			{
-				//ft_printf("yolo\n");
-				test_recurse(recurse, opt);
-				del_lst(recurse);
+				recurse = create_lst(tmp->content->path);
+				display_recurse(tmp->content->path, recurse, opt);
+				if (recurse)
+					test_recurse(recurse, opt), del_lst(recurse);
 			}
 		}
 	}
@@ -48,15 +49,12 @@ t_all	*create_lst(char *path)
 	DIR 		*dir;
 	char 		*str;
 
-	//ft_printf("path: %s\n", path);
 	if (path[ft_strlen(path) - 1] != '/')
 		path = ft_strjoin(path, "/");
-	//ft_printf("[create]path: %s\n", path);
 	if (!(dir = opendir(path)))
 		ft_printf("opendir error\n");
 	new = (t_all *)malloc(sizeof(t_all));
 	new = NULL;
-	//ft_printf("path: %s\n", path);
 	while ((dirp = readdir(dir)) != NULL)
 	{
 		str = ft_strjoin(path, dirp->d_name);
@@ -64,9 +62,7 @@ t_all	*create_lst(char *path)
 		 dirp->d_name, dirp)));
 		ft_strdel(&str);
 	}
-	// ft_strdel(&path);
 	if ((closedir(dir)) == -1)
 		ft_printf("error closedir\n");
-	//ft_strdel(&path);
 	return (new);
 }

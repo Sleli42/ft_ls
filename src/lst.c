@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/25 01:00:29 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/04/14 19:41:08 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/04/15 03:53:35 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,14 @@ void	del_lst(t_all *alst)
 				free(tmp->content->path);
 			if (tmp->content->name)
 				free(tmp->content->name);
+			if (tmp->content->date)
+				free(tmp->content->date);
+			if (tmp->content->rights)
+				free(tmp->content->rights);
+			if (tmp->content->link)
+				free(tmp->content->link);
+			if (tmp->content->size)
+				free(tmp->content->size);
 			if (tmp)
 				free(tmp);
 			tmp = next_list;
