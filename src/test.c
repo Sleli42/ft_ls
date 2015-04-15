@@ -6,11 +6,20 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/27 03:04:17 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/04/15 03:53:40 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/04/16 01:33:41 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
+
+void 	test_opt(t_opt *opt)
+{
+	ft_printf("opt->%c = %d\n", 'a', opt->a);
+ 	ft_printf("opt->%c = %d\n", 'l', opt->l);
+ 	ft_printf("opt->%c = %d\n", 'r', opt->r);
+ 	ft_printf("opt->%c = %d\n", 't', opt->t);
+ 	ft_printf("opt->%c = %d\n", 'R', opt->R);
+}
 
 void 	test_lst(t_all *lst)
 {

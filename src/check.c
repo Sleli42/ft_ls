@@ -6,36 +6,43 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/03 12:28:14 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/04/15 03:53:29 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/04/16 01:33:33 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-void	check_options(t_opt *opt, char **av)
+static void 	init_options(t_opt *opt, char *av)
 {
-	char	*check;
-	int		i;
+	int i;
 
-	check = av[1];
-	i = 0;
-	if (check[i] == '-')
+	i = 1;
+	//ft_putstr("hallo\n");
+	while (av[i])
 	{
-		while (check[i])
-		{
-			if (check[i] == 'a')
-				opt->a = 1;
-			if (check[i] == 'l')
-				opt->l = 1;
-			if (check[i] == 't')
-				opt->t = 1;
-			if (check[i] == 'r')
-				opt->r = 1;
-			if (check[i] == 'R')
-				opt->R = 1;
-			i++;
-		}
+		if (av[i] == 'a')
+			opt->a = 1;
+		if (av[i] == 'l')
+			opt->l = 1;
+		if (av[i] == 'r')
+			opt->r = 1;
+		if (av[i] == 't')
+			opt->t = 1;
+		if (av[i] == 'R')
+			opt->R = 1;
+		i++;
 	}
-	else
-		opt->no_opt = 1;
+}
+
+void 		check_options(t_opt *opt, char **av, int ac)
+{
+	int i;
+
+	i = 0;
+	while (i < ac)
+	{
+		if (av[i][0] == '-' && av[i][1])
+			init_options(opt, av[i]);
+		i++;
+	}
 }

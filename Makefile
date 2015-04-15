@@ -6,7 +6,7 @@
 #    By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/03/03 12:31:07 by lubaujar          #+#    #+#              #
-#    Updated: 2015/04/15 03:53:42 by lubaujar         ###   ########.fr        #
+#    Updated: 2015/04/16 01:33:42 by lubaujar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,8 @@ SRC = main.c\
 	  recurse.c\
 	  lst.c\
 	  utils.c\
+	  utils2.c\
+	  utils3.c\
 	  test.c\
 	  sort.c\
 	  display.c\

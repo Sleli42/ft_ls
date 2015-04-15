@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/03 12:09:37 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/04/15 03:53:38 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/04/16 01:03:01 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@ typedef struct	s_infos
 	char 			*size;
 	int 			is_dir;
 	unsigned int	blksize;
-	// int 			maxlen_link;
-	// int 			maxlen_size;
 	struct passwd	*uid;
  	struct group 	*gid;
 	t_stat			stat;
@@ -61,19 +59,22 @@ typedef struct 	s_all
 	struct s_all 	*prev;
 }				t_all;
 
+int 	ft_printf(const char *s, ...);
+
 /* test.c */
-void	test_opt(t_opt *opt);
 void	test_dir2(t_all *lst);
 void	test_path(t_all *lst);
 void	test_statfile(t_all **lst);
 void	test_sort(t_all **lst);
 void 	test_lst(t_all *lst);
+void 	test_opt(t_opt *opt);
 
 /* add.c */
 t_infos *add_statfile(char *path, char *filename, t_dirent *dirp);
 
 /* sort.c */
 void 	sort_name(t_all **alst);
+void 	sort_time(t_all **alst);
 
 /* lst.c */
 void	lst_add_elem(t_all **alst, t_all *elem);
@@ -88,7 +89,7 @@ int		main(int ac, char **av);
 void	read_directory(t_opt *opt, t_all *all);
 
 /* check.c */
-void	check_options(t_opt *opt, char **av);
+void	check_options(t_opt *opt, char **av, int ac);
 
 /* init.c */
 void	init(t_opt *opt, t_all *all);
@@ -101,16 +102,25 @@ void	test_recurse(t_all *lst, t_opt *opt);
 /* utils.c */
 char	*get_rights(mode_t mode);
 char	*cut_date(char *long_date);
-int		ft_printf(char const *rfmt, ...);
 int 	is_parent_or_current(char *name);
-int 	get_type2(unsigned char c);
 char 	get_type(mode_t mode);
-
 void	define_maxlen(t_all **alst);
+
+/* utils2.c */
+int 	search_max_size(t_all *lst);
+int 	search_max_link(t_all *lst);
+char 	*create_str(char *s, int max);
+void 	modif_size(t_all **lst, int max);
+void 	modif_link(t_all **lst, int max);
+
+/* utils3.c */
+int 	define_blksize(t_all **all);
+t_all	*goto_last_elem(t_all *all);
 
 /* display.c */
 void 	displays(t_all *all, t_opt *opt);
 void	display_recurse(char *path, t_all *recurse, t_opt *opt);
 void 	display_lst(t_all *all, t_opt *opt);
 void 	display_statfile(t_all *all, t_opt *opt);
+void 	display_infos(t_infos *curr);
 #endif
