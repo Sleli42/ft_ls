@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/07 20:01:43 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/04/16 01:33:31 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/04/16 06:10:51 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,6 @@
 
 void 	displays(t_all *all, t_opt *opt)
 {
-	sort_name(&all);
-	if (opt->t == 1)
-		sort_time(&all);
 	if (opt->l == 1)
 	{
 		display_statfile(all, opt);
@@ -37,9 +34,7 @@ void 	display_lst(t_all *all, t_opt *opt)
 {
 	t_all *tmp;
 
-	//tmp = NULL;
-	// ft_printf("%s\n%s\n", tmp->content->name, tmp->prev->content->name);
-	// exit (1);
+	tmp = all;
 	tmp = (opt->r) ? goto_last_elem(all) : all;
 	if (tmp)
 	{

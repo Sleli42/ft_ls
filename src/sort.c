@@ -6,12 +6,32 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/30 17:14:33 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/04/16 01:33:39 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/04/16 05:59:28 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "ls.h"
+
+void 	reverse_list(t_all **alst)
+{
+	t_all 	*tmp;
+	t_all 	*tmp2;
+
+	tmp = *alst;
+	if (*alst)
+	{
+		while (tmp->next)
+			tmp = tmp->next;
+		while (tmp)
+		{
+			tmp2 = tmp;
+			tmp = tmp->prev;
+			tmp2 = tmp->next;
+		}
+		tmp2 = *alst;
+	}
+}
 
 void 	swap_elem(t_all **a, t_all **b)
 {
