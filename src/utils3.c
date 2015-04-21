@@ -6,13 +6,13 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/15 18:57:03 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/04/21 09:55:56 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/04/21 10:53:01 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-int 	define_blksize(t_all **all)
+int 	define_blksize(t_all **all, t_opt *opt)
 {
 	t_all *tmp;
 	int   ret;
@@ -21,10 +21,18 @@ int 	define_blksize(t_all **all)
 	ret = 0;
 	if (*all)
 	{
-		while (tmp->next)
+		while (tmp)
 		{
-			if (tmp->content->blksize != 0)
-				ret += tmp->content->blksize;
+			if (opt->a)
+			{
+				if (tmp->content->blksize != 0)
+					ret += tmp->content->blksize;
+			}
+			else
+			{
+				if (tmp->content->name[0] != '.')
+					ret += tmp->content->blksize;
+			}
 			tmp = tmp->next;
 		}
 	}

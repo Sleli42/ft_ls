@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/30 17:14:33 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/04/21 09:30:52 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/04/21 12:41:27 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,27 @@ void 	reverse_list(t_all **alst)
 {
 	t_all 	*tmp;
 	t_all 	*tmp2;
+	t_all 	*tmp3;
 
 	tmp = *alst;
-	if (*alst)
+	//ft_printf("->%s\n", tmp->content->name);
+	while (tmp->next)
 	{
-		while (tmp->next)
-			tmp = tmp->next;
-		while (tmp)
-		{
-			tmp2 = tmp;
-			tmp = tmp->prev;
-			tmp2 = tmp->next;
-		}
-		tmp2 = *alst;
+		//ft_printf("---->%s\n", tmp->content->name);
+		tmp = tmp->next;
+	}
+	while (tmp)
+	{
+		//ft_printf("->%s\n", tmp->content->name);
+		tmp2 = tmp;
+		tmp2 = tmp2->next;
+		tmp = tmp->prev;
+	}
+	tmp3 = tmp2;
+	while (tmp3)
+	{
+		ft_printf("->%s\n", tmp3->content->name);
+		tmp3 = tmp3->next;
 	}
 }
 

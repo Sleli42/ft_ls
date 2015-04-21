@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/03 12:09:37 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/04/21 09:21:55 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/04/21 10:40:36 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ void 	modif_size(t_all **lst, int max);
 void 	modif_link(t_all **lst, int max);
 
 /* utils3.c */
-int 	define_blksize(t_all **all);
+int 	define_blksize(t_all **all, t_opt *opt);
 t_all	*goto_last_elem(t_all *all);
 
 /* display.c */

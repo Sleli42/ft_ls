@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/07 20:01:43 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/04/21 09:55:12 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/04/21 13:44:45 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void 	display_statfile(t_all *all, t_opt *opt)
 	t_all 			*tmp;
 
 	define_maxlen(&all);
-	all->content->blksize = define_blksize(&all);
+	all->content->blksize = define_blksize(&all, opt);
 	tmp = (opt->r) ? goto_last_elem(all) : all;
 	if (all->content->blksize)
 		ft_printf("total %d\n", all->content->blksize);
