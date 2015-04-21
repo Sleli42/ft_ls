@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/03 14:23:32 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/04/21 13:55:53 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/04/21 15:35:28 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,7 @@ void	test_recurse(t_all *lst, t_opt *opt)
 	t_all	*recurse;
 
 	recurse = NULL;
-	tmp = (opt->r) ? goto_last_elem(lst) : lst;
-	// ft_printf("%s\n", tmp->content->name);
-	// return ;
-	// display_lst(tmp, opt);
-	// ft_printf("%s\n%s\n", tmp->content->name,
-	// tmp->next->content->name);
-	// exit(1);
+	tmp = lst;
 	if (!tmp)
 		return ;
 	if (lstat(tmp->content->path, &tmp->content->stat) == -1)
@@ -41,11 +35,13 @@ void	test_recurse(t_all *lst, t_opt *opt)
 				recurse = create_lst(tmp->content->path);
 				display_recurse(tmp->content->path, recurse, opt);
 				if (recurse)
-					test_recurse(recurse, opt), del_lst(recurse);
+					test_recurse(recurse = (opt->r) ?
+						goto_last_elem(recurse) : recurse, opt),
+						del_lst(recurse);
 			}
 		}
 	}
-	test_recurse((opt->r) ? tmp->prev : tmp->next, opt);
+	test_recurse(tmp = (opt->r) ? tmp->prev : tmp->next, opt);
 }
 
 t_all	*create_lst(char *path)

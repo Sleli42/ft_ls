@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/03 12:09:37 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/04/21 10:40:36 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/04/21 15:32:38 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ t_infos *add_statfile(char *path, char *filename, t_dirent *dirp);
 /* sort.c */
 void 	sort_name(t_all **alst);
 void 	sort_time(t_all **alst);
-void 	reverse_list(t_all **alst);
+t_all 	*reverse_list(t_all *alst);
 
 /* lst.c */
 void	lst_add_elem(t_all **alst, t_all *elem);
