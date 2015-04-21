@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/03 12:09:37 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/04/21 15:32:38 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/04/21 16:12:32 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int		main(int ac, char **av);
 void	read_directory(t_opt *opt, t_all *all);
 
 /* check.c */
-void	check_options(t_opt *opt, char **av, int ac);
+int 	check_options(t_opt *opt, char **av, int ac);
 
 /* init.c */
 void	init(t_opt *opt, t_all *all);
@@ -125,4 +125,8 @@ void	display_recurse(char *path, t_all *recurse, t_opt *opt);
 void 	display_lst(t_all *all, t_opt *opt);
 void 	display_statfile(t_all *all, t_opt *opt);
 void 	display_infos(t_infos *curr);
+
+/* error.c */
+void 	error(int error);
+
 #endif

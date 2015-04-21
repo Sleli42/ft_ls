@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/03 14:23:32 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/04/21 15:35:28 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/04/21 16:35:08 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ t_all	*create_lst(char *path)
 	if (path[ft_strlen(path) - 1] != '/')
 		path = ft_strjoin(path, "/");
 	if (!(dir = opendir(path)))
-		ft_printf("opendir error\n");
+		return (NULL);
 	new = (t_all *)malloc(sizeof(t_all));
 	new = NULL;
 	while ((dirp = readdir(dir)) != NULL)
@@ -65,6 +65,6 @@ t_all	*create_lst(char *path)
 		ft_strdel(&str);
 	}
 	if ((closedir(dir)) == -1)
-		ft_printf("error closedir\n");
+		return (NULL);
 	return (new);
 }

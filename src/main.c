@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/03 12:08:09 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/04/21 15:35:29 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/04/21 16:35:59 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	read_directory(t_opt *opt, t_all *all)
 			add_statfile(tmp, dirp->d_name, dirp)));
 	}
 	displays(lst, opt);
-	//write (1, "\n", 1);
 	if (opt->R == 1)
 	{
 		if (opt->r)
@@ -42,7 +41,7 @@ void	read_directory(t_opt *opt, t_all *all)
 		test_recurse(lst, opt);
 	}
 	if ((closedir(dir)) == -1)
-		ft_printf("error closedir\n");
+		return ;
 	del_lst(lst);
 }
 
@@ -54,7 +53,8 @@ int		main(int ac, char **av)
 
 	i = 0;
 	init(&opt, &all);
-	check_options(&opt, av, ac);
+	if (check_options(&opt, av, ac) == -1)
+		exit (1);
 	if (ac == 1)
 		all.content->path = ft_strdup(".");
 	else if (ac > 1)
