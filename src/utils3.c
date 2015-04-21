@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/15 18:57:03 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/04/16 01:33:36 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/04/21 09:55:56 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int 	define_blksize(t_all **all)
 	ret = 0;
 	if (*all)
 	{
-		while (tmp)
+		while (tmp->next)
 		{
 			if (tmp->content->blksize != 0)
 				ret += tmp->content->blksize;

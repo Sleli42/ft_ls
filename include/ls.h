@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/03 12:09:37 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/04/16 06:07:02 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/04/21 09:21:55 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <unistd.h>
 # include "libft.h"
 # include <string.h>
+# include <stdlib.h>
 
 typedef struct	dirent	t_dirent;
 typedef struct	stat	t_stat;
@@ -81,7 +82,7 @@ void 	reverse_list(t_all **alst);
 void	lst_add_elem(t_all **alst, t_all *elem);
 void	lst_add_elem_back(t_all **alst, t_all *elem);
 t_all	*lst_create_elem(t_infos *infos);
-int 	len_lst(t_all *lst);
+int 	len_lst(t_all **lst);
 void	del_lst(t_all *alst);
 t_all	*create_lst(char *path);
 

@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/07 20:01:43 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/04/16 06:10:51 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/04/21 09:55:12 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 
 void 	displays(t_all *all, t_opt *opt)
 {
+	if (opt->t == 1)
+		sort_time(&all);
+	else
+		sort_name(&all);
 	if (opt->l == 1)
 	{
 		display_statfile(all, opt);
@@ -34,7 +38,7 @@ void 	display_lst(t_all *all, t_opt *opt)
 {
 	t_all *tmp;
 
-	tmp = all;
+	//tmp = all;
 	tmp = (opt->r) ? goto_last_elem(all) : all;
 	if (tmp)
 	{
@@ -53,7 +57,7 @@ void 	display_lst(t_all *all, t_opt *opt)
 void 	display_infos(t_infos *curr)
 {
 	ft_putstr(curr->rights);
-	write(1, " ", 1);
+	write(1, "  ", 2);
 	ft_putstr(curr->link);
 	write(1, " ", 1);
 	ft_putstr(curr->uid->pw_name);
@@ -75,8 +79,8 @@ void 	display_statfile(t_all *all, t_opt *opt)
 	define_maxlen(&all);
 	all->content->blksize = define_blksize(&all);
 	tmp = (opt->r) ? goto_last_elem(all) : all;
-	if (all->content->blksize != 0)
-		ft_printf("total %d\n", tmp->content->blksize);
+	if (all->content->blksize)
+		ft_printf("total %d\n", all->content->blksize);
 	if (all)
 	{
 		while (tmp)

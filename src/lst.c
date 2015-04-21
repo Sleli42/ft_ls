@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/25 01:00:29 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/04/15 03:53:35 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/04/21 09:07:57 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,20 @@ void	del_lst(t_all *alst)
 	}
 }
 
-int		len_lst(t_all *tmp)
+int		len_lst(t_all **tmp)
 {
 	int		i;
+	t_all	*count;
 
 	i = 0;
-	if (tmp)
+	count = *tmp;
+	if (count)
 	{
-		while (tmp != NULL)
-			tmp = tmp->next, i++;
+		while (count)
+		{
+			i++;
+			count = count->next;
+		}
 	}
 	else
 		return (0);

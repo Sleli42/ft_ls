@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/03 14:23:32 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/04/16 06:07:15 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/04/21 09:44:43 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	test_recurse(t_all *lst, t_opt *opt)
 	t_all	*recurse;
 
 	recurse = NULL;
-	tmp = (opt->r) ? goto_last_elem(lst) : lst;
+	tmp = lst;
 	// display_lst(tmp, opt);
 	// ft_printf("%s\n%s\n", tmp->content->name,
 	// tmp->next->content->name);
@@ -33,7 +33,7 @@ void	test_recurse(t_all *lst, t_opt *opt)
 		if (is_parent_or_current(tmp->content->name) != 1)
 		{
 			if (opt->a != 1 && tmp->content->name[0] == '.')
-				tmp = (opt->r) ? tmp->prev : tmp->next;
+				tmp = tmp->next;
 			else
 			{
 				recurse = create_lst(tmp->content->path);
@@ -43,7 +43,7 @@ void	test_recurse(t_all *lst, t_opt *opt)
 			}
 		}
 	}
-	test_recurse(opt->r ? tmp->prev : tmp->next, opt);
+	test_recurse(tmp->next, opt);
 }
 
 t_all	*create_lst(char *path)
