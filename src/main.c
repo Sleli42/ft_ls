@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/03 12:08:09 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/04/21 16:35:59 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/04/22 22:11:48 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,12 @@ void	read_directory(t_opt *opt, t_all *all)
 
 int		main(int ac, char **av)
 {
-	t_opt	opt;
-	t_all 	all;
+	t_opt		opt;
+	t_all 		all;
+	t_infos 	*file;
+	//t_dirent 	*dirp;
 	int 	i;
-
+									/* multi directory */
 	i = 0;
 	init(&opt, &all);
 	if (check_options(&opt, av, ac) == -1)
@@ -58,8 +60,21 @@ int		main(int ac, char **av)
 	if (ac == 1)
 		all.content->path = ft_strdup(".");
 	else if (ac > 1)
+	{
 		if (av[ac - 1][0] != '-')
 			all.content->path = ft_strdup(av[ac - 1]);
+	}
+	if (lstat(all.content->path, &all.content->stat) != -1
+		&& S_ISREG(all.content->stat.st_mode))
+	{
+		if (opt.l == 1)
+		{
+			file = add_statfile(all.content->path, all.content->path, NULL);
+			display_infos(file);
+		}
+		else
+			ft_printf("%s\n", av[ac - 1]);
+	}
 	read_directory(&opt, &all);
 	return (0);
 }

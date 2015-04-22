@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/14 02:36:49 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/04/16 01:33:33 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/04/22 21:59:03 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@ t_infos 	*add_statfile(char *path, char *filename, t_dirent *dirp)
 	infos = (t_infos*)malloc(sizeof(t_infos));
 	infos->path = ft_strdup(path);
 	infos->name = ft_strdup(filename);
-	if (dirp->d_type == DT_DIR)
-		infos->is_dir = 1;
+	if (dirp != NULL)
+		if (dirp->d_type == DT_DIR)
+			infos->is_dir = 1;
 	if (lstat(infos->path, &infos->stat) == -1)
 		ft_printf("[-l]error lstat\n");
 	infos->uid = getpwuid(infos->stat.st_uid);
