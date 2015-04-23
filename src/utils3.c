@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/15 18:57:03 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/04/21 10:53:01 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/04/23 11:41:16 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,15 @@ t_all	*goto_last_elem(t_all *all)
 		while (tmp->next)
 			tmp = tmp->next;
 	return (tmp);
+}
+
+int 	count_dir(int ac, char **av)
+{
+	int 	ret;
+
+	ret = 0;
+	while (ac-- > 1)
+		if (av[ac - 1][0] != '-')
+			ret++;
+	return (ret);
 }

@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/03 12:09:37 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/04/22 22:04:29 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/04/23 11:38:17 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ t_all	*create_lst(char *path);
 
 /* main.c */
 int		main(int ac, char **av);
+void 	check_if_file(t_all *all, t_opt *opt, char **av, int ac);
 void	read_directory(t_opt *opt, t_all *all);
 
 /* check.c */
@@ -118,6 +119,7 @@ void 	modif_link(t_all **lst, int max);
 /* utils3.c */
 int 	define_blksize(t_all **all, t_opt *opt);
 t_all	*goto_last_elem(t_all *all);
+int 	count_dir(int ac, char **av);
 
 /* display.c */
 void 	displays(t_all *all, t_opt *opt);

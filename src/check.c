@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/03 12:28:14 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/04/21 16:24:16 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/04/23 11:21:05 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ static int 	check_error(char c)
 static int 	init_options(t_opt *opt, char *av)
 {
 	int i;
-	int ret;
 
 	i = 1;
 	if (check_error(av[1]) == -1)
@@ -36,15 +35,15 @@ static int 	init_options(t_opt *opt, char *av)
 		while (av[i])
 		{
 			if (av[i] == 'a')
-				opt->a = 1, ret = 1;
+				opt->a = 1;
 			if (av[i] == 'l')
-				opt->l = 1, ret = 1;
+				opt->l = 1;
 			if (av[i] == 'r')
-				opt->r = 1, ret = 1;
+				opt->r = 1;
 			if (av[i] == 't')
-				opt->t = 1, ret = 1;
+				opt->t = 1;
 			if (av[i] == 'R')
-				opt->R = 1, ret = 1;
+				opt->R = 1;
 			i++;
 		}
 	}
