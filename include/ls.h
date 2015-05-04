@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/03 12:09:37 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/04/23 11:38:17 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/05/05 00:39:13 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void	test_statfile(t_all **lst);
 void	test_sort(t_all **lst);
 void 	test_lst(t_all *lst);
 void 	test_opt(t_opt *opt);
+void 	test_value_s(t_all *all);
 
 /* add.c */
 t_infos *add_statfile(char *path, char *filename, t_dirent *dirp);
@@ -88,7 +89,9 @@ t_all	*create_lst(char *path);
 
 /* main.c */
 int		main(int ac, char **av);
-void 	check_if_file(t_all *all, t_opt *opt, char **av, int ac);
+void 	display_alone_file(t_all *all, t_opt *opt, char **av, int ac);
+void 	list_file(t_all *all, t_opt *opt, char **av, int ac, int ct);
+void 	list_dir(t_all *all, t_opt *opt, char **av, int ac, int ct);
 void	read_directory(t_opt *opt, t_all *all);
 
 /* check.c */

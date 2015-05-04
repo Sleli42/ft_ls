@@ -6,11 +6,26 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/27 03:04:17 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/04/16 01:33:41 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/05/05 00:38:57 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
+
+void 	test_value_s(t_all *all)
+{
+	t_all *tmp;
+
+	tmp = all;
+	while (tmp)
+	{
+		if (lstat(tmp->content->path, &tmp->content->stat) == -1)
+			return ;
+		ft_printf("name = %s\n", tmp->content->name);
+		ft_printf("nb = %d\n", (tmp->content->stat.st_mode & S_IROTH));
+		tmp = tmp->next;
+	}
+}
 
 void 	test_opt(t_opt *opt)
 {

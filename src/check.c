@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/03 12:28:14 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/04/23 11:21:05 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/05/04 23:16:59 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int 	check_error(char c)
 	return (1);
 }
 
-static int 	init_options(t_opt *opt, char *av)
+static void init_options(t_opt *opt, char *av)
 {
 	int i;
 
@@ -28,7 +28,6 @@ static int 	init_options(t_opt *opt, char *av)
 	{
 		ft_printf("ls: illegal option -- %c\n", av[1]);
 		ft_printf("usage: ls [-Ralrt] [file ...]\n");
-		return (-1);
 	}
 	else
 	{
@@ -47,7 +46,6 @@ static int 	init_options(t_opt *opt, char *av)
 			i++;
 		}
 	}
-	return (1);
 }
 
 int		check_options(t_opt *opt, char **av, int ac)
@@ -56,10 +54,14 @@ int		check_options(t_opt *opt, char **av, int ac)
 	int ret;
 
 	i = 0;
+	ret = 0;
 	while (i < ac)
 	{
 		if (av[i][0] == '-' && av[i][1])
-			ret = init_options(opt, av[i]);
+		{
+			init_options(opt, av[i]);
+			ret++;
+		}
 		i++;
 	}
 	return (ret);

@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/03 14:23:32 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/04/21 16:35:08 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/05/05 00:44:30 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,10 @@ void	test_recurse(t_all *lst, t_opt *opt)
 		return ;
 	if (lstat(tmp->content->path, &tmp->content->stat) == -1)
 		return ;
+	//ft_printf("nb = %d\n", (tmp->content->stat.st_mode & S_IROTH));
 	if (tmp->content->is_dir == 1
-		&& get_type(tmp->content->stat.st_mode) == 'd')
+		&& get_type(tmp->content->stat.st_mode) == 'd'
+		&& (tmp->content->stat.st_mode & S_IROTH) != 0)
 	{
 		if (is_parent_or_current(tmp->content->name) != 1)
 		{
