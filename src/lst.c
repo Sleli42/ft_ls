@@ -48,13 +48,13 @@ void	del_lst(t_all *alst)
 	}
 }
 
-int		len_lst(t_all **tmp)
+int		len_lst(t_all *tmp)
 {
 	int		i;
 	t_all	*count;
 
 	i = 0;
-	count = *tmp;
+	count = tmp;
 	if (count)
 	{
 		while (count)

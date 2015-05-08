@@ -49,7 +49,7 @@ typedef struct	s_infos
 	char 			*s_uid;
 	char 			*s_gid;
 	int 			is_dir;
-	unsigned int	blksize;
+	int				blksize;
 	t_stat			stat;
 }				t_infos;
 
@@ -75,7 +75,7 @@ void 	test_value_s(t_all *all);
 void 	test_major_minor(t_all *all);
 
 /* add.c */
-t_infos *add_statfile(char *path, char *filename, t_dirent *dirp);
+t_infos *add_statfile(char *path, char *filename);
 
 /* sort.c */
 void 	sort_name(t_all **alst);
@@ -86,13 +86,12 @@ t_all 	*reverse_list(t_all *alst);
 void	lst_add_elem(t_all **alst, t_all *elem);
 void	lst_add_elem_back(t_all **alst, t_all *elem);
 t_all	*lst_create_elem(t_infos *infos);
-int 	len_lst(t_all **lst);
+int 	len_lst(t_all *lst);
 void	del_lst(t_all *alst);
 t_all	*create_lst(char *path);
 
 /* main.c */
 int		main(int ac, char **av);
-void 	display_alone_file(t_all *all, t_opt *opt, char **av, int ac);
 void 	list_file(t_all *all, t_opt *opt, char **av, int ac, int ct);
 void 	list_dir(t_all *all, t_opt *opt, char **av, int ac, int ct);
 void	read_directory(t_opt *opt, t_all *all);
@@ -127,10 +126,11 @@ char 	*major_minor_to_str(t_stat *stat);
 
 /* display.c */
 void 	displays(t_all *all, t_opt *opt);
-void	display_recurse(char *path, t_all *recurse, t_opt *opt);
+void	display_recurse(char *path, t_all *recurse, t_opt *opt, int jok);
 void 	display_lst(t_all *all, t_opt *opt);
 void 	display_statfile(t_all *all, t_opt *opt);
 void 	display_infos(t_infos *curr);
+void 	display_alone_file(t_all *all, t_opt *opt, char **av, int ac);
 
 /* search.c */
 int 	search_max_size(t_all *lst);

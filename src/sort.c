@@ -46,7 +46,7 @@ void 	sort_name(t_all **alst)
 	i = 0;
 	if (tmp)
 	{
-		while (i++ < len_lst(&tmp))
+		while (i++ < len_lst(tmp))
 		{
 			while (tmp->next)
 			{
@@ -68,7 +68,7 @@ void 	sort_time(t_all **alst)
 	i = 0;
 	if (tmp)
 	{
-		while (i++ < len_lst(&tmp))
+		while (i++ < len_lst(tmp))
 		{
 			while (tmp->next)
 			{

@@ -22,20 +22,20 @@ void 	displays(t_all *all, t_opt *opt)
 	else
 		sort_name(&all);
 	if (opt->l == 1)
-	{
 		display_statfile(all, opt);
-	}
 	else
 		display_lst(all, opt);
 }
 
-void	display_recurse(char *path, t_all *recurse, t_opt *opt)
+void	display_recurse(char *path, t_all *recurse, t_opt *opt, int jok)
 {
 	write(1, "\n", 1);
 	ft_putstr(path);
 	write(1, ":\n", 2);
-	//ft_printf("%s:\n", path);
-	displays(recurse, opt);
+	if (jok == 1)
+		ft_printf("ls: Users: Permission denied\n");
+	else
+		displays(recurse, opt);
 }
 
 void 	display_lst(t_all *all, t_opt *opt)
@@ -52,14 +52,12 @@ void 	display_lst(t_all *all, t_opt *opt)
 			{
 				ft_putstr(tmp->content->name);
 				write(1, "\n", 1);
-				//ft_printf("%s\n", tmp->content->name);
 			}
 			else
 				if (tmp->content->name[0] != '.')
 				{
 					ft_putstr(tmp->content->name);
 					write(1, "\n", 1);
-					//ft_printf("%s\n", tmp->content->name);
 				}
 			tmp = (opt->r) ? tmp->prev : tmp->next;
 		}
@@ -68,7 +66,6 @@ void 	display_lst(t_all *all, t_opt *opt)
 
 void 	display_infos(t_infos *curr)
 {
-	//ft_printf("%s  %s ", curr->rights, curr->link);
 	ft_putstr(curr->rights);
 	write(1, "  ", 2);
 	ft_putstr(curr->link);
@@ -92,9 +89,9 @@ void 	display_statfile(t_all *all, t_opt *opt)
 	define_maxlen(&all);
 	all->content->blksize = define_blksize(&all, opt);
 	tmp = (opt->r) ? goto_last_elem(all) : all;
-	if (all->content->blksize)
+	if (all->content->blksize > -1)
 		ft_printf("total %d\n", all->content->blksize);
-	if (all)
+	if (tmp)
 	{
 		while (tmp)
 		{
@@ -103,7 +100,21 @@ void 	display_statfile(t_all *all, t_opt *opt)
 			else
 				if (tmp->content->name[0] != '.')
 					display_infos(tmp->content);
-			tmp = (opt->r) ? tmp->prev : tmp->next;
+			if (tmp->prev || tmp->next)
+				tmp = (opt->r) ? tmp->prev : tmp->next;
 		}
 	}
+}
+
+void 	display_alone_file(t_all *all, t_opt *opt, char **av, int ac)
+{
+	t_infos 	*file;
+
+	if (opt->l == 1)
+	{
+		file = add_statfile(all->content->path, all->content->path);
+		display_infos(file);
+	}
+	else
+		ft_printf("%s\n", av[ac]);
 }

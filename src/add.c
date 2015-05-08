@@ -12,27 +12,21 @@
 
 #include "ls.h"
 
-t_infos 	*add_statfile(char *path, char *filename, t_dirent *dirp)
+t_infos 	*add_statfile(char *path, char *filename)
 {
 	t_infos *infos;
 	struct passwd	*uid;
  	struct group 	*gid;
 
-	(void)dirp;
 	if (path == NULL || filename == NULL)
-		ft_error("add_statfile", 3); //debug
-		//return (NULL);
+		ft_error("add_statfile 1", 3);
 	infos = (t_infos*)malloc(sizeof(t_infos));
 	infos->path = ft_strdup(path);
 	infos->name = ft_strdup(filename);
 	if (lstat(infos->path, &infos->stat) == -1)
-	{
-		//ft_printf("infname: %s\n", infos->name);
-		ft_error("add_statfile", 3);
-	}
+		ft_error("add_statfile 2", 3);
 	if (get_type(infos->stat.st_mode) == 'd')
 		infos->is_dir = 1;
-		//return (NULL);
 	uid = getpwuid(infos->stat.st_uid);
 	gid = getgrgid(infos->stat.st_gid);
 	infos->s_uid = ft_strdup(uid->pw_name);

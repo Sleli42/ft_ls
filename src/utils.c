@@ -52,10 +52,12 @@ char	get_type(mode_t mode)
 
 int		is_parent_or_current(char *name)
 {
-	// if  (ft_strcmp(name, ".") == 0 || ft_strcmp(name, "..") == 0)
-	// 	return (1);
-	if ((name[0] == '.' && ft_strlen(name) == 1)
-		|| (name[0] == '.' && name[1] == '.' && ft_strlen(name) == 2))
+	int		i;
+
+	i = ft_strlen(name);
+	if ((i == 1) && (name[0] == '.'))
+		return (1);
+	if ((i == 2) && (name[0] == '.' && name[1] == '.'))
 		return (1);
 	return (0);
 }
