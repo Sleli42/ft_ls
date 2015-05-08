@@ -6,12 +6,14 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/07 20:01:43 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/04/21 14:29:30 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/05/08 18:52:27 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "ls.h"
+
+#include <stdio.h>
 
 void 	displays(t_all *all, t_opt *opt)
 {
@@ -30,7 +32,9 @@ void 	displays(t_all *all, t_opt *opt)
 void	display_recurse(char *path, t_all *recurse, t_opt *opt)
 {
 	write(1, "\n", 1);
-	ft_printf("%s:\n", path);
+	ft_putstr(path);
+	write(1, ":\n", 2);
+	//ft_printf("%s:\n", path);
 	displays(recurse, opt);
 }
 
@@ -45,10 +49,18 @@ void 	display_lst(t_all *all, t_opt *opt)
 		while (tmp)
 		{
 			if (opt->a == 1)
-				ft_printf("%s\n", tmp->content->name);
+			{
+				ft_putstr(tmp->content->name);
+				write(1, "\n", 1);
+				//ft_printf("%s\n", tmp->content->name);
+			}
 			else
 				if (tmp->content->name[0] != '.')
-					ft_printf("%s\n", tmp->content->name);
+				{
+					ft_putstr(tmp->content->name);
+					write(1, "\n", 1);
+					//ft_printf("%s\n", tmp->content->name);
+				}
 			tmp = (opt->r) ? tmp->prev : tmp->next;
 		}
 	}
@@ -56,13 +68,14 @@ void 	display_lst(t_all *all, t_opt *opt)
 
 void 	display_infos(t_infos *curr)
 {
+	//ft_printf("%s  %s ", curr->rights, curr->link);
 	ft_putstr(curr->rights);
 	write(1, "  ", 2);
 	ft_putstr(curr->link);
 	write(1, " ", 1);
-	ft_putstr(curr->uid->pw_name);
+	ft_putstr(curr->s_uid);
 	write(1, "  ", 2);
-	ft_putstr(curr->gid->gr_name);
+	ft_putstr(curr->s_gid);
 	write(1, "  ", 2);
 	ft_putstr(curr->size);
 	write(1, " ", 1);

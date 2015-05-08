@@ -6,11 +6,19 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/03 12:08:09 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/05/05 01:17:06 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/05/08 18:36:47 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
+
+void	ft_error(char *err, int ex)
+{
+	if (err && *err)
+		ft_putendl(err);
+	if (ex)
+		exit(ex);
+}
 
 void	read_directory(t_opt *opt, t_all *all)
 {
@@ -19,10 +27,9 @@ void	read_directory(t_opt *opt, t_all *all)
 	DIR			*dir;
 	char		*tmp;
 
-	lst = (t_all *)malloc(sizeof(t_all));
+	//lst = NULL;
+	//lst = (t_all *)malloc(sizeof(t_all));
 	lst = NULL;
-	if (all->content->path == NULL)
-		all->content->path = ft_strdup("./");
 	if (all->content->path[ft_strlen(all->content->path) - 1] != '/')
 		all->content->path= ft_strjoin(all->content->path, "/");
 	if (!(dir = opendir(all->content->path)))
@@ -30,11 +37,11 @@ void	read_directory(t_opt *opt, t_all *all)
 	while ((dirp = readdir(dir)) != NULL)
 	{
 		tmp = ft_strjoin(all->content->path, dirp->d_name);
-		lst_add_elem_back(&lst, lst_create_elem(
-			add_statfile(tmp, dirp->d_name, dirp)));
+		lst_add_elem_back(&lst, lst_create_elem(add_statfile(tmp, dirp->d_name, dirp)));
 	}
-	// test_value_s(lst);
-	// exit(1);
+	ft_strdel(&tmp);
+	//test_major_minor(lst);
+	 //exit(1);
 
 
 	/* sticky bit (background jaune) */
@@ -82,6 +89,9 @@ void 	list_file(t_all *all, t_opt *opt, char **av, int ac, int i)
 
 void 	list_dir(t_all *all, t_opt *opt, char **av, int ac, int i)
 {
+	int 	ct;
+
+	ct = count_dir(ac, av);
 	while (i < ac)
 	{
 		if (av[i][0] != '-')
@@ -90,9 +100,11 @@ void 	list_dir(t_all *all, t_opt *opt, char **av, int ac, int i)
 			if (lstat(all->content->path, &all->content->stat) != -1
 				&& S_ISDIR(all->content->stat.st_mode))
 			{
-				ft_printf("\n%s:\n", av[i]);
+				if (ct > 1)
+					ft_printf("\n%s:\n", av[i]);
 				read_directory(opt, all);
 			}
+			ft_strdel(&all->content->path);
 		}
 		i++;
 	}

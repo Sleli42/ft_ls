@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/03 12:09:37 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/05/05 00:39:13 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/05/08 18:51:08 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ typedef struct	s_infos
 	char 			*rights;
 	char 			*link;
 	char 			*size;
+	char 			*s_uid;
+	char 			*s_gid;
 	int 			is_dir;
 	unsigned int	blksize;
-	struct passwd	*uid;
- 	struct group 	*gid;
 	t_stat			stat;
 }				t_infos;
 
@@ -59,6 +59,8 @@ typedef struct 	s_all
 	struct s_all	*next;
 	struct s_all 	*prev;
 }				t_all;
+
+void	ft_error(char *err, int ex); //warning exit()
 
 int 	ft_printf(const char *s, ...);
 
@@ -70,6 +72,7 @@ void	test_sort(t_all **lst);
 void 	test_lst(t_all *lst);
 void 	test_opt(t_opt *opt);
 void 	test_value_s(t_all *all);
+void 	test_major_minor(t_all *all);
 
 /* add.c */
 t_infos *add_statfile(char *path, char *filename, t_dirent *dirp);
@@ -113,16 +116,14 @@ char 	get_type(mode_t mode);
 void	define_maxlen(t_all **alst);
 
 /* utils2.c */
-int 	search_max_size(t_all *lst);
-int 	search_max_link(t_all *lst);
 char 	*create_str(char *s, int max);
-void 	modif_size(t_all **lst, int max);
-void 	modif_link(t_all **lst, int max);
+char 	*create_str_uidgid(char *s, int max);
 
 /* utils3.c */
 int 	define_blksize(t_all **all, t_opt *opt);
 t_all	*goto_last_elem(t_all *all);
 int 	count_dir(int ac, char **av);
+char 	*major_minor_to_str(t_stat *stat);
 
 /* display.c */
 void 	displays(t_all *all, t_opt *opt);
@@ -130,6 +131,18 @@ void	display_recurse(char *path, t_all *recurse, t_opt *opt);
 void 	display_lst(t_all *all, t_opt *opt);
 void 	display_statfile(t_all *all, t_opt *opt);
 void 	display_infos(t_infos *curr);
+
+/* search.c */
+int 	search_max_size(t_all *lst);
+int 	search_max_link(t_all *lst);
+int 	search_max_uid(t_all *lst);
+int 	search_max_gid(t_all *lst);
+
+/* modif.c */
+void 	modif_size(t_all **lst, int max);
+void 	modif_link(t_all **lst, int max);
+void 	modif_uid(t_all **lst, int max);
+void 	modif_gid(t_all **lst, int max);
 
 /* error.c */
 void 	error(int error);
