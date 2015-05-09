@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/07 20:01:43 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/05/08 18:52:27 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/05/09 18:14:27 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,20 @@ void	display_recurse(char *path, t_all *recurse, t_opt *opt, int jok)
 	ft_putstr(path);
 	write(1, ":\n", 2);
 	if (jok == 1)
+	{
 		ft_printf("ls: Users: Permission denied\n");
+		return ;
+	}
 	else
+	{
 		displays(recurse, opt);
+	}
 }
 
 void 	display_lst(t_all *all, t_opt *opt)
 {
 	t_all *tmp;
 
-	//tmp = all;
 	tmp = (opt->r) ? goto_last_elem(all) : all;
 	if (tmp)
 	{
@@ -54,11 +58,13 @@ void 	display_lst(t_all *all, t_opt *opt)
 				write(1, "\n", 1);
 			}
 			else
+			{
 				if (tmp->content->name[0] != '.')
 				{
 					ft_putstr(tmp->content->name);
 					write(1, "\n", 1);
 				}
+			}
 			tmp = (opt->r) ? tmp->prev : tmp->next;
 		}
 	}
@@ -87,7 +93,7 @@ void 	display_statfile(t_all *all, t_opt *opt)
 	t_all 			*tmp;
 
 	define_maxlen(&all);
-	all->content->blksize = define_blksize(&all, opt);
+	all->content->blksize = define_blksize(all, opt);
 	tmp = (opt->r) ? goto_last_elem(all) : all;
 	if (all->content->blksize > -1)
 		ft_printf("total %d\n", all->content->blksize);

@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/15 18:57:03 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/05/07 16:29:32 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/05/09 17:51:59 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,16 @@ char 	*major_minor_to_str(t_stat *stat)
 	return (s);
 }
 
-int 	define_blksize(t_all **all, t_opt *opt)
+int 	define_blksize(t_all *all, t_opt *opt)
 {
 	t_all *tmp;
 	int   ret;
 
-	tmp = *all;
+	tmp = all;
 	ret = 0;
-	if (*all)
+	if (tmp == NULL)
+		return (-1);
+	else
 	{
 		while (tmp)
 		{

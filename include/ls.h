@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/03 12:09:37 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/05/08 18:51:08 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/05/09 17:35:01 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ char 	*create_str(char *s, int max);
 char 	*create_str_uidgid(char *s, int max);
 
 /* utils3.c */
-int 	define_blksize(t_all **all, t_opt *opt);
+int 	define_blksize(t_all *all, t_opt *opt);
 t_all	*goto_last_elem(t_all *all);
 int 	count_dir(int ac, char **av);
 char 	*major_minor_to_str(t_stat *stat);

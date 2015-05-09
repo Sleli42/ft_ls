@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/03 14:23:32 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/05/08 19:01:12 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/05/09 18:22:19 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,21 @@ static void	create_and_del_recurse(t_all *all, t_opt *opt)
 
 	tmp = all;
 	recurse = create_lst(tmp->content->path);
-	if ((tmp->content->stat.st_mode & S_IRUSR) == 0)
+	if ((tmp->content->stat.st_mode & S_IROTH) == 0
+	// 	|| (tmp->content->stat.st_mode & S_IROTH) == 256)
+	// {
+	// 	if (ft_strcmp(recurse->content->name, ".") == 0)
+	// 		exit (1);
 	 	display_recurse(tmp->content->path, recurse, opt, 1);
+	}
 	else
 		display_recurse(tmp->content->path, recurse, opt, 0);
 	if (recurse)
 	{
 		test_recurse(recurse = (opt->r) ?
 			goto_last_elem(recurse) : recurse, opt);
-		del_lst(recurse);
 	}
+	del_lst(recurse);
 }
 
 void	test_recurse(t_all *lst, t_opt *opt)
