@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/03 12:08:09 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/05/08 18:36:47 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/05/11 02:43:08 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,9 @@ void	read_directory(t_opt *opt, t_all *all)
 	{
 		tmp = ft_strjoin(all->content->path, dirp->d_name);
 		lst_add_elem_back(&lst, lst_create_elem(add_statfile(tmp, dirp->d_name)));
+		ft_strdel(&tmp);
 	}
-	ft_strdel(&tmp);
+	ft_strdel(&all->content->path);
 	displays(lst, opt);
 	if (opt->R == 1)
 	{
@@ -64,7 +65,6 @@ void 	list_file(t_all *all, t_opt *opt, char **av, int ac, int i)
 		}
 		i++;
 	}
-	write(1, "\n", 1);
 }
 
 void 	list_dir(t_all *all, t_opt *opt, char **av, int ac, int i)
@@ -86,6 +86,8 @@ void 	list_dir(t_all *all, t_opt *opt, char **av, int ac, int i)
 				if (i < ac && i != ac - 1)
 					write(1, "\n", 1);
 			}
+			else
+				ft_printf("ls: %s: No such file or directory\n", all->content->path), exit (1);
 			ft_strdel(&all->content->path);
 		}
 		i++;
@@ -103,7 +105,7 @@ int		main(int ac, char **av)
 	i += check_options(&opt, av, ac);
 	if (i == ac)
 	{
-		all.content->path = ft_strdup(".");
+		all.content->path = ".";
 		read_directory(&opt, &all);
 	}
 	else

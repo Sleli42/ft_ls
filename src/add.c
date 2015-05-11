@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/14 02:36:49 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/05/08 18:52:12 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/05/11 02:43:07 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,14 @@ t_infos 	*add_statfile(char *path, char *filename)
 	gid = getgrgid(infos->stat.st_gid);
 	infos->s_uid = ft_strdup(uid->pw_name);
 	infos->s_gid = ft_strdup(gid->gr_name);
-	infos->rights = ft_strdup(get_rights(infos->stat.st_mode));
-	infos->date = ft_strdup(cut_date(ctime(&(infos->stat.st_mtime))));
-	infos->link = ft_strdup(ft_itoa(infos->stat.st_nlink));
+	infos->rights = get_rights(infos->stat.st_mode);
+	infos->date = cut_date(ctime(&(infos->stat.st_mtime)));
+	infos->link = ft_itoa(infos->stat.st_nlink);
 	if (get_type(infos->stat.st_mode) == 'b'
 		|| get_type(infos->stat.st_mode) == 'c')
-		infos->size = ft_strdup(major_minor_to_str(&infos->stat));
+		infos->size = major_minor_to_str(&infos->stat);
 	else
-		infos->size = ft_strdup(ft_itoa(infos->stat.st_size));
+		infos->size = ft_itoa(infos->stat.st_size);
 	infos->blksize = infos->stat.st_blocks;
 	return (infos);
 }

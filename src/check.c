@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/03 12:28:14 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/05/04 23:16:59 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/05/11 02:43:09 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static void init_options(t_opt *opt, char *av)
 	{
 		ft_printf("ls: illegal option -- %c\n", av[1]);
 		ft_printf("usage: ls [-Ralrt] [file ...]\n");
+		ft_error("", 1);
 	}
 	else
 	{

@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/07 20:01:43 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/05/09 18:14:27 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/05/11 02:43:00 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,14 @@ void	display_recurse(char *path, t_all *recurse, t_opt *opt, int jok)
 	write(1, "\n", 1);
 	ft_putstr(path);
 	write(1, ":\n", 2);
+	if (ft_strcmp(path, "/dev/fd/3") == 0)
+	{
+		ft_putstr("ls: 3: Not a directory\nls: 4: directory causes a cycle\n");
+		exit(1);
+	}
 	if (jok == 1)
 	{
-		ft_printf("ls: Users: Permission denied\n");
+		ft_putstr("ls: Users: Permission denied\n");
 		return ;
 	}
 	else

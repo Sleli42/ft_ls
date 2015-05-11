@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/25 01:00:29 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/05/08 18:52:04 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/05/11 02:43:11 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	del_lst(t_all *alst)
 
 	tmp = alst;
 	next_list = NULL;
-	//ft_putstr("SALOPE\n");
 	if (tmp)
 	{
 		while (tmp)
@@ -41,6 +40,8 @@ void	del_lst(t_all *alst)
 				free(tmp->content->s_uid);
 			if (tmp->content->s_gid)
 				free(tmp->content->s_gid);
+			if (tmp->content)
+				free(tmp->content);
 			if (tmp)
 				free(tmp);
 			tmp = next_list;
@@ -76,10 +77,7 @@ void 	lst_add_elem_back(t_all **alst, t_all *new_elem)
 	if (new_elem != NULL)
 	{
 		if (*alst == NULL)
-		{
-			//ft_printf("%s\n", "premier tour lst_add_elem_back");
 			*alst = new_elem;
-		}
 		else
 		{
 			while (curr->next != NULL)
@@ -112,21 +110,16 @@ t_all		*lst_create_elem(t_infos *infos)
 {
 	t_all		*new;
 
-	//ft_printf("path: %s\nfilename: %s\n", path, filename);
 	if (!(new = (t_all *)malloc(sizeof(t_all))))
 		ft_error("lst_create_elem", 2);
-		//new = NULL;
 	if (infos == NULL)
 		new->content = NULL;
 	else
 	{
-		new->content = (t_infos *)malloc(sizeof(t_infos));
+		new->content = infos;
 		if (new->content == NULL)
 			return (NULL);
-		new->content = infos;
 	}
-	//ft_printf("[lst] |%s|\n", new->content->name);
-	// ft_printf("[lst] |%d|\n", new->content.is_dir);
 	new->next = NULL;
 	new->prev = NULL;
 	return (new);
