@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/11 22:37:49 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/05/12 04:00:51 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/05/13 23:35:13 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,11 @@ void 	list_elem(t_all **args, t_opt *opt, char *filename, char *path)
 	if ((data = data_init(filename, path, opt)) == NULL)
 		return ;
 	if (!(*args))
+	{
 		*args = lst_create_elem(data);
+	}
 	else
+	{
 		lst_add_elem_back(args, lst_create_elem(data));
+	}
 }

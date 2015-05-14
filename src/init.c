@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/03 12:19:54 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/05/06 21:13:15 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/05/11 20:18:19 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ void 	init_all(t_all *all)
 	all->content->rights = NULL;
 	all->content->s_uid = NULL;
 	all->content->s_gid = NULL;
+	all->content->link = NULL;
+	all->content->size = NULL;
 	all->content->is_dir = 0;
-	all->content->link = 0;
-	all->content->size = 0;
 	all->content->blksize = 0;
 }

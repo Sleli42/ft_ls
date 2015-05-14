@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/11 23:00:40 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/05/13 01:06:10 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/05/14 18:25:40 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@ char	get_type(mode_t mode)
 	return (0);
 }
 
-char	*get_rights(mode_t mode)
+char	*get_rights(mode_t mode, char *path)
 {
 	char	*s;
 	int		i;
 
-	s = (char *)malloc(sizeof(char) * 12);
+	s = (char *)malloc(sizeof(char) * 11);
 	i = 0;
 	s[i++] = get_type(mode);
 	s[i++] = (mode & S_IRUSR ? 'r' : '-');
@@ -57,6 +57,8 @@ char	*get_rights(mode_t mode)
 		s[i++] = (mode & S_IXOTH ? 't' : 'T');
 	else
 		s[i++] = (mode & S_IXOTH ? 'x' : '-');
+	if (listxattr(path, NULL, 0, XATTR_NOFOLLOW) > 0)
+		s[i++] = '@';
 	s[i] = '\0';
 	return (s);
 }

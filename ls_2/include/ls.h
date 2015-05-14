@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/03 12:09:37 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/05/13 01:40:25 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/05/14 19:51:36 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LS_H
 
 # include <dirent.h>
+# include <sys/xattr.h>
 # include <sys/stat.h>
 # include <sys/types.h>
 # include <pwd.h>
@@ -24,6 +25,7 @@
 # include "libft.h"
 # include <string.h>
 # include <stdlib.h>
+
 
 #include <stdio.h>
 
@@ -45,8 +47,8 @@ typedef struct 	s_maxlen
 {
 	unsigned int 	link;
 	unsigned int 	octet;
-	unsigned int 	uid;				INIT STRUCT
-	unsigned int 	gid;				MALLOC STRUCT
+	unsigned int 	uid;
+	unsigned int 	gid;
 }				t_maxlen;
 
 typedef struct	s_infos
@@ -62,6 +64,7 @@ typedef struct	s_infos
 	char 			*s_gid;
 	int 			is_dir;
 	int				blksize;
+	int 			err;
 }				t_infos;
 
 typedef struct 	s_all
@@ -80,6 +83,8 @@ int 		main(int ac, char **av);
 */
 t_opt 		*init_opt(void);
 t_infos		*data_init(char *filename, char *path, t_opt *opt);
+t_maxlen 	*init_len(void);
+t_infos 	*init_data_null(void);
 /*
 ** lst.c **
 */
@@ -90,8 +95,9 @@ void		del_lst(t_all *alst);
 /*
 ** displays.c **
 */
+void 		display_files(t_all *files, t_opt *opt);
 void 		display_lst(t_all *list, t_opt *opt);
-void 		display_statfile(t_infos *curr);
+void 		display_statfile(t_infos *curr, t_maxlen *len);
 void 		long_display(t_all *all, t_opt *opt);
 /*
 ** sort.c **
@@ -115,7 +121,7 @@ t_all 		*open_directory(t_opt *opt, char *dir_path);
 /*
 ** utils.c **
 */
-char		*get_rights(mode_t mode);
+char		*get_rights(mode_t mode, char *path);
 char		get_type(mode_t mode);
 char 		*major_minor_to_str(t_stat *stat);
 char		*cut_date(char *long_date);
@@ -125,10 +131,16 @@ int			is_parent_or_current(char *name);
 */
 t_all		*goto_last_elem(t_all *all);
 int 		define_blksize(t_all *all, t_opt *opt);
+t_maxlen	*define_maxlen(t_all *lst, t_opt *opt);
+unsigned int 	update_maxlen(char *s, unsigned int curr_len);
 /*
 ** error.c **
 */
+void 		err(void);
 void 		error_opt(char bad_opt);
+void 		put_error_dev(int error);
+void 		put_error_perms(char *s);
+void 		put_error_file_dir(char *s);
 /*
 ** check.c **
 */

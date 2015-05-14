@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/03 14:23:32 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/05/11 02:43:02 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/05/11 19:54:56 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,7 @@ void	test_recurse(t_all *lst, t_opt *opt)
 		if (opt->a != 1)
 		{
 			if (tmp->content->name[0] != '.')
-			{
 				create_and_del_recurse(tmp, opt);
-			}
 			else
 				test_recurse((opt->r) ? tmp->prev : tmp->next, opt);
 		}

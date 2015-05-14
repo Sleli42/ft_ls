@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/12 02:20:50 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/05/13 01:23:57 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/05/14 19:56:52 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,21 @@
 void 	read_files(t_all **args, t_opt *opt)
 {
 	t_all 	*nav;
-	t_all 	*files;
+	int 	i;
 
 	nav = *args;
-	files = NULL;
+	sort_lists(&nav, opt);
+	i = 0;
 	while (nav && !nav->content->is_dir)
 	{
-		list_elem(&files, opt, nav->content->name, nav->content->path);
+		if (opt->l)
+			display_statfile(nav->content, define_maxlen(*args, opt)), i++;
+		else
+			ft_putendl(nav->content->name), i++;
 		nav = nav->next;
 	}
-	if (files)
-	{
-		sort_lists(&files, opt);
-		display_lst(files, opt);
-		del_lst(files);
-	}
+	if (nav && i > 0)
+		write(1, "\n", 1);
 	if (nav)
 		read_dirs(nav, opt);
 }
@@ -40,19 +40,23 @@ void 	read_dirs(t_all *args_dir, t_opt *opt)
 	t_all 	*dirs;
 
 	nav = (opt->r) ? goto_last_elem(args_dir) : args_dir;
-	while (nav)
+	while (nav && nav->content->is_dir)
 	{
-		if (nav->content->is_dir)
-		{
-			dirs = open_directory(opt, nav->content->path);
-			sort_lists(&dirs, opt);
-			display_lst(dirs, opt);
-			if (opt->R)
-				recurse_dir(dirs, opt);
-			del_lst(dirs);
-		}
+		if (len_lst(args_dir) > 1)
+			ft_putstr(nav->content->name), write(1, ":\n", 2);
+		if (nav->content->err == 1)
+			put_error_perms(nav->content->name);
+		dirs = open_directory(opt, nav->content->path);
+		sort_lists(&dirs, opt);
+		display_lst(dirs, opt);
+		if (opt->R)
+			write(1, "\n", 1), recurse_dir(dirs, opt);
+		del_lst(dirs);
+		if ((opt->r) ? nav->prev != NULL : nav->next != NULL)
+			write(1, "\n", 1);
 		nav = (opt->r) ? nav->prev : nav->next;
 	}
+	del_lst(nav);
 }
 
 t_all 	*open_directory(t_opt *opt, char *dir_name)
