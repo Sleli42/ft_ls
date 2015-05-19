@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/03 12:09:37 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/05/19 02:29:39 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/05/19 03:09:03 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,7 @@ char					*add_char_file(char *s, t_stat buff);
 char					*add_symb_link(char *s, char *buff);
 void					swap_elem(t_all **a, t_all **b);
 void					extended_data_init(t_infos *new, t_stat buff, t_opt *opt);
+void 					extended_lst_display(t_all *tmp, t_opt *opt);
 /*
 ** error.c **
 */

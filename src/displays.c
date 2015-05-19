@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/13 01:01:42 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/05/19 03:03:16 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/05/19 03:07:40 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,7 @@ void		display_files(t_all *files, t_opt *opt)
 	if (opt->l || opt->n)
 		display_statfile(tmp->content, define_maxlen(files, opt), opt);
 	else
-	{
 		ft_putstr(tmp->content->name);
-	}
 }
 
 void		display_lst(t_all *list, t_opt *opt)
@@ -43,21 +41,7 @@ void		display_lst(t_all *list, t_opt *opt)
 				ft_putendl(tmp->content->name);
 			}
 			else
-			{
-				if (!opt->big_a && tmp->content->name[0] != '.')
-				{
-					if (opt->i)
-						ft_putstr(tmp->content->inode), write(1, " ", 1);
-					ft_putendl(tmp->content->name);
-				}
-				else if (opt->big_a &&
-						!is_parent_or_current(tmp->content->name, opt))
-				{
-					if (opt->i)
-						ft_putstr(tmp->content->inode), write(1, " ", 1);
-					ft_putendl(tmp->content->name);
-				}
-			}
+				extended_lst_display(tmp, opt);
 			tmp = (opt->r) ? tmp->prev : tmp->next;
 		}
 	}

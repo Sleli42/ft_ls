@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/18 20:25:51 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/05/19 03:03:47 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/05/19 03:07:11 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,22 @@ void	extended_data_init(t_infos *new, t_stat buff, t_opt *opt)
 		new->rights = get_rights(buff.st_mode, 0);
 		new->link = ft_itoa(buff.st_nlink);
 		long_data(new, buff, opt);
+	}
+}
+
+void 	extended_lst_display(t_all *tmp, t_opt *opt)
+{
+	if (!opt->big_a && tmp->content->name[0] != '.')
+	{
+		if (opt->i)
+			ft_putstr(tmp->content->inode), write(1, " ", 1);
+		ft_putendl(tmp->content->name);
+	}
+	else if (opt->big_a &&
+			!is_parent_or_current(tmp->content->name, opt))
+	{
+		if (opt->i)
+			ft_putstr(tmp->content->inode), write(1, " ", 1);
+		ft_putendl(tmp->content->name);
 	}
 }
