@@ -5,80 +5,65 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/03/03 14:23:32 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/05/11 19:54:56 by lubaujar         ###   ########.fr       */
+/*   Created: 2015/05/12 03:30:19 by lubaujar          #+#    #+#             */
+/*   Updated: 2015/05/19 01:57:42 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-static void	create_and_del_recurse(t_all *all, t_opt *opt)
+void	recurse_dir(t_all *dirs, t_opt *opt)
 {
-	t_all 	*recurse;
-	t_all 	*tmp;
-
-	tmp = all;
-	recurse = create_lst(tmp->content->path);
-	if ((tmp->content->stat.st_mode & S_IROTH) == 0)
-		display_recurse(tmp->content->path, recurse, opt, 1);
-	else
-		display_recurse(tmp->content->path, recurse, opt, 0);
-	if (recurse)
-	{
-		test_recurse(recurse = (opt->r) ?
-			goto_last_elem(recurse) : recurse, opt);
-		del_lst(recurse);
-	}
-}
-
-void	test_recurse(t_all *lst, t_opt *opt)
-{
-	t_all	*tmp;
+	t_all	*nav;
 	t_all	*recurse;
 
+	nav = (opt->r) ? goto_last_elem(dirs) : dirs;
 	recurse = NULL;
-	tmp = lst;
-	if (!tmp)
-		return ;
-	if (lstat(tmp->content->path, &tmp->content->stat) == -1)
-		return ;
-	if (tmp->content->is_dir == 1
-		&& get_type(tmp->content->stat.st_mode) == 'd'
-		&& is_parent_or_current(tmp->content->name) == 0)
+	while (nav)
 	{
-		if (opt->a != 1)
+		if (!is_parent_or_current(nav->content->name, opt)
+			&& nav->content->is_dir && nav->content->err == 0)
 		{
-			if (tmp->content->name[0] != '.')
-				create_and_del_recurse(tmp, opt);
-			else
-				test_recurse((opt->r) ? tmp->prev : tmp->next, opt);
+			write(1, "\n", 1);
+			recurse = recurse_to_dir(opt, nav->content->path);
+			if (recurse)
+			{
+				sort_lists(&recurse, opt);
+				if (nav->content->path[
+					ft_strlen(nav->content->path) - 1] == '/')
+					nav->content->path[ft_strlen(nav->content->path) - 1] = ':';
+				ft_putendl(nav->content->path);
+				display_lst(recurse, opt), recurse_dir(recurse, opt);
+				del_lst(recurse);
+			}
 		}
-		else
-			create_and_del_recurse(tmp, opt);
+		nav = (opt->r) ? nav->prev : nav->next;
 	}
-	test_recurse((opt->r) ? tmp->prev : tmp->next, opt);
 }
 
-t_all	*create_lst(char *path)
+t_all	*recurse_to_dir(t_opt *opt, char *dir_name)
 {
+	t_all		*list;
 	t_dirent	*dirp;
-	t_all		*new;
-	DIR 		*dir;
-	char 		*str;
+	DIR			*entry;
+	char		*path;
 
-	if (path[ft_strlen(path) - 1] != '/')
-		path = ft_strjoin(path, "/");
-	if (!(dir = opendir(path)))
-		return (NULL);
-	new = NULL;
-	while ((dirp = readdir(dir)) != NULL)
+	list = NULL;
+	if (!is_parent_or_current(dir_name, opt))
 	{
-		str = ft_strjoin(path, dirp->d_name);
-		lst_add_elem_back(&new, lst_create_elem(add_statfile(str,
-		 dirp->d_name)));
+		if (!(entry = opendir(dir_name)))
+		{
+			if (ft_strcmp(dir_name, "/dev/fd/3/") == 0)
+				ft_putendl(dir_name), put_error_dev(42);
+		}
+		while ((dirp = readdir(entry)) != NULL)
+		{
+			path = ft_strjoin(dir_name, dirp->d_name);
+			list_elem(&list, opt, dirp->d_name, path);
+			ft_strdel(&path);
+		}
+		if (closedir(entry) == -1)
+			err();
 	}
-	ft_strdel(&str);
-	if ((closedir(dir)) == -1)
-		return (NULL);
-	return (new);
+	return (list);
 }

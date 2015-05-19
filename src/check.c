@@ -5,65 +5,60 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/03/03 12:28:14 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/05/11 02:43:09 by lubaujar         ###   ########.fr       */
+/*   Created: 2015/05/11 22:37:49 by lubaujar          #+#    #+#             */
+/*   Updated: 2015/05/19 01:57:43 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-static int 	check_error(char c)
+static void	list_opts_2(t_opt *opt, char *s, int i)
 {
-	if (c != 'a' && c != 'l' && c != 't' && c != 'r' && c != 'R')
-		return (-1);
-	return (1);
-}
-
-static void init_options(t_opt *opt, char *av)
-{
-	int i;
-
-	i = 1;
-	if (check_error(av[1]) == -1)
-	{
-		ft_printf("ls: illegal option -- %c\n", av[1]);
-		ft_printf("usage: ls [-Ralrt] [file ...]\n");
-		ft_error("", 1);
-	}
+	if (s[i] == 'i')
+		opt->i = 1;
+	else if (s[i] == 'n')
+		opt->n = 1;
+	else if (s[i] == 'R')
+		opt->big_r = 1;
+	else if (s[i] == 'S')
+		opt->big_s = 1;
 	else
-	{
-		while (av[i])
-		{
-			if (av[i] == 'a')
-				opt->a = 1;
-			if (av[i] == 'l')
-				opt->l = 1;
-			if (av[i] == 'r')
-				opt->r = 1;
-			if (av[i] == 't')
-				opt->t = 1;
-			if (av[i] == 'R')
-				opt->R = 1;
-			i++;
-		}
-	}
+		error_opt(s[i]);
 }
 
-int		check_options(t_opt *opt, char **av, int ac)
+void		list_opts(t_opt *opt, char *s)
 {
 	int i;
-	int ret;
 
 	i = 0;
-	ret = 0;
-	while (i < ac)
+	while (s[++i])
 	{
-		if (av[i][0] == '-' && av[i][1])
-		{
-			init_options(opt, av[i]);
-			ret++;
-		}
-		i++;
+		if (s[i] == 'a')
+			opt->a = 1;
+		else if (s[i] == 'A')
+			opt->big_a = 1;
+		else if (s[i] == 'l')
+			opt->l = 1;
+		else if (s[i] == 'F')
+			opt->big_f = 1;
+		else if (s[i] == 'r')
+			opt->r = 1;
+		else if (s[i] == 't')
+			opt->t = 1;
+		else
+			list_opts_2(opt, s, i);
 	}
-	return (ret);
+}
+
+void		list_elem(t_all **args, t_opt *opt, char *filename, char *path)
+{
+	t_infos		*data;
+
+	data = NULL;
+	if ((data = data_init(filename, path, opt)) == NULL)
+		return ;
+	if (!(*args))
+		*args = lst_create_elem(data);
+	else
+		lst_add_elem_back(args, lst_create_elem(data));
 }

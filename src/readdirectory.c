@@ -6,16 +6,16 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/12 02:20:50 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/05/14 19:56:52 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/05/19 01:56:29 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-void 	read_files(t_all **args, t_opt *opt)
+void	read_files(t_all **args, t_opt *opt)
 {
-	t_all 	*nav;
-	int 	i;
+	t_all	*nav;
+	int		i;
 
 	nav = *args;
 	sort_lists(&nav, opt);
@@ -23,7 +23,7 @@ void 	read_files(t_all **args, t_opt *opt)
 	while (nav && !nav->content->is_dir)
 	{
 		if (opt->l)
-			display_statfile(nav->content, define_maxlen(*args, opt)), i++;
+			display_statfile(nav->content, define_maxlen(*args, opt), opt), i++;
 		else
 			ft_putendl(nav->content->name), i++;
 		nav = nav->next;
@@ -34,10 +34,10 @@ void 	read_files(t_all **args, t_opt *opt)
 		read_dirs(nav, opt);
 }
 
-void 	read_dirs(t_all *args_dir, t_opt *opt)
+void	read_dirs(t_all *args_dir, t_opt *opt)
 {
-	t_all 	*nav;
-	t_all 	*dirs;
+	t_all	*nav;
+	t_all	*dirs;
 
 	nav = (opt->r) ? goto_last_elem(args_dir) : args_dir;
 	while (nav && nav->content->is_dir)
@@ -49,7 +49,7 @@ void 	read_dirs(t_all *args_dir, t_opt *opt)
 		dirs = open_directory(opt, nav->content->path);
 		sort_lists(&dirs, opt);
 		display_lst(dirs, opt);
-		if (opt->R)
+		if (opt->big_r)
 			write(1, "\n", 1), recurse_dir(dirs, opt);
 		del_lst(dirs);
 		if ((opt->r) ? nav->prev != NULL : nav->next != NULL)
@@ -59,16 +59,16 @@ void 	read_dirs(t_all *args_dir, t_opt *opt)
 	del_lst(nav);
 }
 
-t_all 	*open_directory(t_opt *opt, char *dir_name)
+t_all	*open_directory(t_opt *opt, char *dir_name)
 {
-	t_all 		*list;
-	t_dirent 	*dirp;
-	DIR 		*entry;
-	char 		*path;
+	t_all		*list;
+	t_dirent	*dirp;
+	DIR			*entry;
+	char		*path;
 
 	list = NULL;
 	if (!(entry = opendir(dir_name)))
-		printf("error [open.directory] -> opendir\n"), exit(1);
+		err();
 	while ((dirp = readdir(entry)) != NULL)
 	{
 		path = ft_strjoin(dir_name, dirp->d_name);
@@ -76,6 +76,6 @@ t_all 	*open_directory(t_opt *opt, char *dir_name)
 		ft_strdel(&path);
 	}
 	if (closedir(entry) == -1)
-		printf("error [open.directory] -> closedir\n"), exit(1);
+		err();
 	return (list);
 }

@@ -5,51 +5,55 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/03/25 01:00:29 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/05/11 02:43:11 by lubaujar         ###   ########.fr       */
+/*   Created: 2015/05/11 23:22:14 by lubaujar          #+#    #+#             */
+/*   Updated: 2015/05/19 01:51:54 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-void	del_lst(t_all *alst)
+t_all		*lst_create_elem(t_infos *infos)
 {
-	t_all	*next_list;
-	t_all	*tmp;
+	t_all		*new;
 
-	tmp = alst;
-	next_list = NULL;
-	if (tmp)
+	if (!(new = (t_all *)malloc(sizeof(t_all))))
+		return (NULL);
+	if (infos == NULL)
+		new->content = NULL;
+	else
 	{
-		while (tmp)
-		{
-			next_list = tmp->next;
-			if (tmp->content->path)
-				free(tmp->content->path);
-			if (tmp->content->name)
-				free(tmp->content->name);
-			if (tmp->content->date)
-				free(tmp->content->date);
-			if (tmp->content->rights)
-				free(tmp->content->rights);
-			if (tmp->content->link)
-				free(tmp->content->link);
-			if (tmp->content->size)
-				free(tmp->content->size);
-			if (tmp->content->s_uid)
-				free(tmp->content->s_uid);
-			if (tmp->content->s_gid)
-				free(tmp->content->s_gid);
-			if (tmp->content)
-				free(tmp->content);
-			if (tmp)
-				free(tmp);
-			tmp = next_list;
-		}
+		new->content = infos;
+		if (new->content == NULL)
+			return (NULL);
 	}
+	new->next = NULL;
+	new->prev = NULL;
+	return (new);
 }
 
-int		len_lst(t_all *tmp)
+void		lst_add_elem_back(t_all **alst, t_all *new_elem)
+{
+	t_all *curr;
+
+	curr = *alst;
+	if (new_elem != NULL)
+	{
+		if (*alst == NULL)
+			*alst = new_elem;
+		else
+		{
+			while (curr->next != NULL)
+				curr = curr->next;
+			curr->next = new_elem;
+			new_elem->prev = curr;
+			new_elem->next = NULL;
+		}
+	}
+	else
+		return ;
+}
+
+int			len_lst(t_all *tmp)
 {
 	int		i;
 	t_all	*count;
@@ -69,58 +73,48 @@ int		len_lst(t_all *tmp)
 	return (i);
 }
 
-void 	lst_add_elem_back(t_all **alst, t_all *new_elem)
+static void	extended_del_lst(t_all *tmp)
 {
-	t_all *curr;
-
-	curr = *alst;
-	if (new_elem != NULL)
-	{
-		if (*alst == NULL)
-			*alst = new_elem;
-		else
-		{
-			while (curr->next != NULL)
-				curr = curr->next;
-			curr->next = new_elem;
-			new_elem->prev = curr;
-			new_elem->next = NULL;
-		}
-	}
-	else
-		ft_error("lst_add_elem_back, new_elem NULL", 4);
+	if (tmp->content->rights)
+		free(tmp->content->rights);
+	if (tmp->content->link)
+		free(tmp->content->link);
+	if (tmp->content->size)
+		free(tmp->content->size);
+	if (tmp->content->s_uid)
+		free(tmp->content->s_uid);
+	if (tmp->content->s_gid)
+		free(tmp->content->s_gid);
+	if (tmp->content->inode)
+		free(tmp->content->inode);
+	if (tmp->content->lnk_name)
+		free(tmp->content->lnk_name);
 }
 
-void	lst_add_elem(t_all **alst, t_all *new_elem)
+void		del_lst(t_all *alst)
 {
-	if (new_elem != NULL)
+	t_all	*next_list;
+	t_all	*tmp;
+
+	tmp = alst;
+	next_list = NULL;
+	if (tmp)
 	{
-		if (*alst != NULL)
+		while (tmp)
 		{
-			new_elem->next = *alst;
-			(*alst)->prev = new_elem;
-			*alst = new_elem;
+			next_list = tmp->next;
+			if (tmp->content->path)
+				free(tmp->content->path);
+			if (tmp->content->name)
+				free(tmp->content->name);
+			if (tmp->content->date)
+				free(tmp->content->date);
+			extended_del_lst(tmp);
+			if (tmp->content)
+				free(tmp->content);
+			if (tmp)
+				free(tmp);
+			tmp = next_list;
 		}
 	}
-	else
-		*alst = new_elem;
-}
-
-t_all		*lst_create_elem(t_infos *infos)
-{
-	t_all		*new;
-
-	if (!(new = (t_all *)malloc(sizeof(t_all))))
-		ft_error("lst_create_elem", 2);
-	if (infos == NULL)
-		new->content = NULL;
-	else
-	{
-		new->content = infos;
-		if (new->content == NULL)
-			return (NULL);
-	}
-	new->next = NULL;
-	new->prev = NULL;
-	return (new);
 }

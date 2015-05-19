@@ -6,7 +6,7 @@
 #    By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/03/03 12:31:07 by lubaujar          #+#    #+#              #
-#    Updated: 2015/05/11 02:43:03 by lubaujar         ###   ########.fr        #
+#    Updated: 2015/05/18 20:32:10 by lubaujar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,20 +16,17 @@ FLAGS = -g -Wall -Wextra -Werror
 LDFLAGS = -I./include/ -I./libft/include/
 
 SRC = main.c\
-	  check.c\
-	  init.c\
-	  recurse.c\
-	  lst.c\
-	  utils.c\
-	  utils2.c\
-	  utils3.c\
-	  test.c\
-	  sort.c\
-	  display.c\
-	  add.c\
-	  error.c\
-	  search.c\
-	  modif.c
+	 	init.c\
+	 	error.c\
+	 	lst.c\
+	 	utils.c\
+	 	check.c\
+	 	sort.c\
+	 	readdirectory.c\
+	 	recurse.c\
+	 	displays.c\
+	 	utils_2.c\
+	 	utils_3.c
 
 OBJ = $(SRC:.c=.o)
 	SRCDIR	= ./src/
@@ -42,7 +39,7 @@ OBJ = $(SRC:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJS) $(INCS)
-	@gcc $(FLAGS) -o $@ $^ -L./libft/ include/libftprintf.a -lft
+	@gcc $(FLAGS) -o $@ $^ -L./libft/ -lft
 	@echo "\n\t \033[32m[All Fine's]\033[0m\n"
 
 $(OBJS): $(SRCS)
