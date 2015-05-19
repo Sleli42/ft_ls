@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/18 20:25:51 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/05/19 03:07:11 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/05/19 14:49:45 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	extended_data_init(t_infos *new, t_stat buff, t_opt *opt)
 	}
 }
 
-void 	extended_lst_display(t_all *tmp, t_opt *opt)
+void	extended_lst_display(t_all *tmp, t_opt *opt)
 {
 	if (!opt->big_a && tmp->content->name[0] != '.')
 	{

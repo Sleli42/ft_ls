@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/11 19:08:57 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/05/19 02:51:19 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/05/19 03:09:28 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,6 @@ void			long_data(t_infos *new, t_stat buff, t_opt *opt)
 		else
 			new->s_gid = ft_strdup(getgrgid(buff.st_gid)->gr_name);
 	}
-	if (opt->i)
-		new->inode = ft_itoa_long(buff.st_ino);
 	new->blksize = buff.st_blocks;
 }
 

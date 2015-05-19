@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/03 12:09:37 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/05/19 03:09:03 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/05/19 15:01:00 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,8 @@ void					del_lst(t_all *alst);
 */
 void					display_files(t_all *files, t_opt *opt);
 void					display_lst(t_all *list, t_opt *opt);
-void					display_statfile(t_infos *curr, t_maxlen *len, t_opt *opt);
+void					display_statfile(t_infos *curr,
+						t_maxlen *len, t_opt *opt);
 void					long_display(t_all *all, t_opt *opt);
 /*
 ** sort.c **
@@ -143,8 +144,9 @@ size_t					update_maxlen(char *s, unsigned int curr_len);
 char					*add_char_file(char *s, t_stat buff);
 char					*add_symb_link(char *s, char *buff);
 void					swap_elem(t_all **a, t_all **b);
-void					extended_data_init(t_infos *new, t_stat buff, t_opt *opt);
-void 					extended_lst_display(t_all *tmp, t_opt *opt);
+void					extended_data_init(t_infos *new,
+						t_stat buff, t_opt *opt);
+void					extended_lst_display(t_all *tmp, t_opt *opt);
 /*
 ** error.c **
 */
@@ -157,6 +159,7 @@ void					put_error_file_dir(char *s);
 ** check.c **
 */
 void					list_opts(t_opt *opt, char *s);
-void					list_elem(t_all **args, t_opt *opt, char *filename, char *path);
+void					list_elem(t_all **args, t_opt *opt,
+						char *filename, char *path);
 
 #endif

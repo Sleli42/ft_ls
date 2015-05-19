@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/12 00:17:23 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/05/19 02:51:22 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/05/19 14:56:44 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 void	sort_lists(t_all **list, t_opt *opt)
 {
+	sort_name(list);
 	if (opt->t)
 		sort_time(list);
-	if (opt->big_s)
+	else if (opt->big_s)
 		sort_size(list);
 	else
 		sort_name(list);
