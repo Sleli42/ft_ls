@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/18 20:25:51 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/05/19 01:58:20 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/05/19 03:03:47 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,9 @@ void	extended_data_init(t_infos *new, t_stat buff, t_opt *opt)
 		new->err = 1;
 	else
 		new->err = 0;
-	if (opt->l || opt->big_s)
+	if (opt->i)
+		new->inode = ft_itoa_long(buff.st_ino);
+	if (opt->l || opt->big_s || opt->n)
 	{
 		new->date = cut_date(ctime(&(buff.st_mtime)));
 		new->rights = get_rights(buff.st_mode, 0);

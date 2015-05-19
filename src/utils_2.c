@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/13 01:03:47 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/05/19 02:20:44 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/05/19 02:24:22 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ t_maxlen		*define_maxlen(t_all *lst, t_opt *opt)
 		{
 			if (!opt->big_a && tmp->content->name[0] != '.')
 				define_2(tmp, opt, len);
-			else if (opt->big_a && !is_parent_or_current(tmp->content->name, opt))
+			else if (opt->big_a
+				&& !is_parent_or_current(tmp->content->name, opt))
 				define_2(tmp, opt, len);
 		}
 		tmp = tmp->next;

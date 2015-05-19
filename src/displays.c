@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/13 01:01:42 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/05/19 01:59:13 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/05/19 03:03:16 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void		display_files(t_all *files, t_opt *opt)
 	t_all	*tmp;
 
 	tmp = files;
-	if (opt->l)
+	if (opt->l || opt->n)
 		display_statfile(tmp->content, define_maxlen(files, opt), opt);
 	else
 	{
@@ -29,7 +29,7 @@ void		display_lst(t_all *list, t_opt *opt)
 {
 	t_all	*tmp;
 
-	if (opt->l)
+	if (opt->l || opt->n)
 		long_display(list, opt);
 	else
 	{
@@ -37,14 +37,26 @@ void		display_lst(t_all *list, t_opt *opt)
 		while (tmp)
 		{
 			if (opt->a)
+			{
+				if (opt->i)
+					ft_putstr(tmp->content->inode), write(1, " ", 1);
 				ft_putendl(tmp->content->name);
+			}
 			else
 			{
 				if (!opt->big_a && tmp->content->name[0] != '.')
+				{
+					if (opt->i)
+						ft_putstr(tmp->content->inode), write(1, " ", 1);
 					ft_putendl(tmp->content->name);
+				}
 				else if (opt->big_a &&
 						!is_parent_or_current(tmp->content->name, opt))
+				{
+					if (opt->i)
+						ft_putstr(tmp->content->inode), write(1, " ", 1);
 					ft_putendl(tmp->content->name);
+				}
 			}
 			tmp = (opt->r) ? tmp->prev : tmp->next;
 		}
@@ -127,7 +139,8 @@ void		long_display(t_all *all, t_opt *opt)
 		{
 			if (!opt->big_a && tmp->content->name[0] != '.')
 				display_statfile(tmp->content, len, opt);
-			else if (opt->big_a && !is_parent_or_current(tmp->content->name, opt))
+			else if (opt->big_a
+				&& !is_parent_or_current(tmp->content->name, opt))
 				display_statfile(tmp->content, len, opt);
 		}
 		tmp = (opt->r) ? tmp->prev : tmp->next;

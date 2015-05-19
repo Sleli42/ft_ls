@@ -6,7 +6,7 @@
 /*   By: lubaujar <lubaujar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/12 02:20:50 by lubaujar          #+#    #+#             */
-/*   Updated: 2015/05/19 01:56:29 by lubaujar         ###   ########.fr       */
+/*   Updated: 2015/05/19 02:58:19 by lubaujar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	read_files(t_all **args, t_opt *opt)
 	i = 0;
 	while (nav && !nav->content->is_dir)
 	{
-		if (opt->l)
+		if (opt->l || opt->n)
 			display_statfile(nav->content, define_maxlen(*args, opt), opt), i++;
 		else
 			ft_putendl(nav->content->name), i++;
